@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Livewire;
+
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+
+class Login extends Component
+{
+    public $email_address;
+    public $password;
+
+    protected $rules = [
+        'email_address' => 'required|email',
+        'password' => 'required|min:6',
+    ];
+
+    public function updated($field)
+    {
+        $this->validateOnly($field);
+    }
+
+    public function loginUser()
+    {
+        $this->validate();
+
+        if (
+            Auth::attempt([
+                'email_address' => $this->email_address,
+                'password' => $this->password
+            ])
+        ) {
+            session()->flash('feedback', 'Login Successful!');
+            return redirect()->to('/dashboard');
+        }
+
+        session()->flash('feedback', 'Invalid Login Details.');
+    }
+
+    public function render()
+    {
+        return view('livewire.login');
+    }
+}
