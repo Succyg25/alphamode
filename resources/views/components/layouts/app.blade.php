@@ -25,6 +25,9 @@
                     </label>
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        @if(auth()->user()?->isAdmin())
+                            <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                        @endif
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('plans') }}">Membership Plans</a></li>
                         <li><a href="{{ route('trainers') }}">Our Trainers</a></li>
@@ -72,6 +75,9 @@
         <div class="min-h-screen">
             {{ $slot }}
         </div>
+
+        <x-footer />
+
 
     </div>
 

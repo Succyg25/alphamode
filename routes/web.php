@@ -9,7 +9,18 @@ use App\Livewire\Register;
 use App\Livewire\Trainers;
 use Illuminate\Support\Facades\Route;
 
+use App\Livewire\About;
+use App\Livewire\Jobs;
+use App\Livewire\Terms;
+use App\Livewire\Privacy;
+use App\Livewire\Profile;
+use App\Livewire\Subscription;
+
 Route::get('/', Home::class)->name('home');
+Route::get('/about', About::class)->name('about');
+Route::get('/careers', Jobs::class)->name('jobs');
+Route::get('/terms', Terms::class)->name('terms');
+Route::get('/privacy', Privacy::class)->name('privacy');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 Route::get('/plans', Plans::class)->name('plans');
@@ -19,6 +30,9 @@ Route::get('/trainers', Trainers::class)->name('trainers');
 Route::middleware('auth')->group(function () {
     Route::get('/contact', Contact::class)->name('contact');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/profile', Profile::class)->name('profile');
+    Route::get('/subscription', Subscription::class)->name('subscription');
+    Route::get('/booking/{trainer}', \App\Livewire\Booking::class)->name('booking');
 });
 
 Route::post('/logout', function () {

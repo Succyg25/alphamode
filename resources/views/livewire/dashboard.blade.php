@@ -67,7 +67,7 @@
                     <p class="text-2xl font-bold">Active</p>
                     <p class="text-sm opacity-80">Plan: Gold Member</p>
                     <div class="card-actions justify-end mt-4">
-                        <button class="btn btn-sm btn-outline btn-white">Manage Subscription</button>
+                        <a href="{{ route('subscription') }}" class="btn btn-sm btn-outline btn-white">Manage Subscription</a>
                     </div>
                 </div>
             </div>
@@ -77,9 +77,9 @@
                 <div class="card-body">
                     <h2 class="card-title">Quick Links</h2>
                     <ul class="menu bg-base-100 w-full p-0">
-                        <li><a>Edit Profile</a></li>
-                        <li><a>Payment Methods</a></li>
-                        <li><a>Workout History</a></li>
+                        <li><a href="{{ route('profile') }}">Edit Profile</a></li>
+                        <li><a href="{{ route('subscription') }}">Payment Methods</a></li>
+                        <li><a href="{{ route('dashboard') }}">Workout History</a></li>
                     </ul>
                 </div>
             </div>

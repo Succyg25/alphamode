@@ -35,7 +35,7 @@ class Register extends Component
 
         $this->reset([
             'username',
-            'email_address',
+            'email',
             'password',
         ]);
 

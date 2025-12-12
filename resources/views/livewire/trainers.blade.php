@@ -20,7 +20,7 @@
                     <p class="text-primary font-semibold">{{ $trainer->specialties }}</p>
                     <p class="mt-2 text-gray-600 text-sm">{{ $trainer->bio }}</p>
                     <div class="card-actions mt-4">
-                        <button class="btn btn-primary btn-sm">Book a Class</button>
+                        <a href="{{ route('booking', $trainer->id) }}" class="btn btn-primary btn-sm">Book a Class</a>
                     </div>
                 </div>
             </div>
