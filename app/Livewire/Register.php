@@ -8,12 +8,12 @@ use Livewire\Component;
 class Register extends Component
 {
     public $username;
-    public $email_address;
+    public $email;
     public $password;
 
     protected $rules = [
         'username' => 'required|min:3|max:20|unique:users,username',
-        'email_address' => 'required|email|max:255|unique:users,email_address',
+        'email' => 'required|email|max:255|unique:users,email',
         'password' => 'required|min:6',
     ];
 
@@ -29,7 +29,7 @@ class Register extends Component
         User::create([
             'name' => $this->username,
             'username' => $this->username,
-            'email_address' => $this->email_address,
+            'email' => $this->email,
             'password' => bcrypt($this->password),
         ]);
 

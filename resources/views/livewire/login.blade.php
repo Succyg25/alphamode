@@ -13,9 +13,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Email Address</legend>
-                    <input type="email" wire:model="email_address" class="input input-lg rounded-2xl w-full"
+                    <input type="email" wire:model="email" class="input input-lg rounded-2xl w-full"
                         placeholder="Type here" />
-                    @error('email_address')<p class="label text-primary">{{ $message }}</p>@enderror
+                    @error('email')<p class="label text-primary">{{ $message }}</p>@enderror
                 </fieldset>
 
                 <fieldset class="fieldset">

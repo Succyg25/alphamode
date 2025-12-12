@@ -10,4 +10,13 @@ class Contact extends Component
     {
         return view('livewire.contact');
     }
+    // Validation
+    public function rules()
+    {
+        return [
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'message' => 'required|min:5',
+        ];
+    }
 }

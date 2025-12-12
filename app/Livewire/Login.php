@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    public $email_address;
+    public $email;
     public $password;
 
     protected $rules = [
-        'email_address' => 'required|email',
+        'email' => 'required|email',
         'password' => 'required|min:6',
     ];
 
@@ -26,7 +26,7 @@ class Login extends Component
 
         if (
             Auth::attempt([
-                'email_address' => $this->email_address,
+                'email' => $this->email,
                 'password' => $this->password
             ])
         ) {
