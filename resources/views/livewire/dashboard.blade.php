@@ -10,6 +10,7 @@
     <h1 class="text-4xl font-bold text-primary">
         Welcome, {{ $user->username }} 👋
     </h1>
+    <br>
 
     <p>Welcome to the dashboard! You are successfully logged in.</p>
 

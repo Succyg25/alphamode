@@ -25,3 +25,11 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect()->route('home');
 })->name('logout');
+
+Route::middleware('admin')->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return 'Admin Dashboard';
+    });
+
+});

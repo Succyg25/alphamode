@@ -21,7 +21,7 @@
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Password</legend>
                     <input type="password" wire:model="password" class="input input-lg rounded-2xl w-full"
-                        placeholder="Type here" />
+                        placeholder="********" />
                     @error('password')<p class="label text-primary">{{ $message }}</p>@enderror
                 </fieldset>
             </div>
