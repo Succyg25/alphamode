@@ -76,9 +76,6 @@
             {{ $slot }}
         </div>
 
-        <x-footer />
-
-
     </div>
 
 </body>

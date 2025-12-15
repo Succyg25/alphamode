@@ -21,4 +21,9 @@ class Dashboard extends Component
             'totalClasses' => WorkoutClass::count(),
         ]);
     }
+
+    public function activePlans()
+    {
+        return Plan::where('status', 'active')->count();
+    }
 }

@@ -1,7 +1,7 @@
 <div>
     <!-- Hero Section -->
     <div class="hero min-h-[50vh] bg-base-100 rounded-3xl shadow-xl overflow-hidden mb-12"
-        style="background-image: url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');">
+        style="background-image: url('/images/background');">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
             <div class="max-w-md">

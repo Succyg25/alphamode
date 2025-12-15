@@ -44,7 +44,6 @@ class Booking extends Component
         BookingModel::create([
             'user_id' => Auth::id(),
             'schedule_id' => $this->selectedSchedule->id,
-            // 'status' => 'confirmed' // Assuming default or unnecessary for now
         ]);
 
         session()->flash('feedback', 'Class booked successfully!');

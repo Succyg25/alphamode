@@ -1,40 +1,37 @@
 <div class="p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">Trainers Directory</h2>
-        <button wire:click="create" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button wire:click="create" class="btn btn-primary">
             Add New Trainer
         </button>
     </div>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <span class="block sm:inline">{{ session('message') }}</span>
+        <div class="alert alert-success mb-4" role="alert">
+            <span>{{ session('message') }}</span>
         </div>
     @endif
 
-    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+    <div class="overflow-x-auto bg-base-100 shadow-xl rounded-lg">
+        <table class="table w-full">
+            <thead>
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Specialties</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
-                    </th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Specialties</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody>
                 @foreach($trainers as $trainer)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $trainer->user->name ?? 'N/A' }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $trainer->user->email ?? 'N/A' }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $trainer->specialties }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <tr class="hover">
+                        <td>{{ $trainer->user->name ?? 'N/A' }}</td>
+                        <td>{{ $trainer->user->email ?? 'N/A' }}</td>
+                        <td>{{ $trainer->specialties }}</td>
+                        <td class="gap-2 flex">
                             <button wire:click="edit({{ $trainer->id }})"
-                                class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</button>
-                            <button wire:click="delete({{ $trainer->id }})" class="text-red-600 hover:text-red-900"
+                                class="btn btn-sm btn-ghost text-info">Edit</button>
+                            <button wire:click="delete({{ $trainer->id }})" class="btn btn-sm btn-ghost text-error"
                                 onclick="confirm('Are you sure? This will delete the user account.') || event.stopImmediatePropagation()">Delete</button>
                         </td>
                     </tr>
@@ -45,53 +42,48 @@
 
     <!-- Modal -->
     @if($isModalOpen)
-        <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div
-                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
-                    <form wire:submit.prevent="store">
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="mb-4">
-                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-                                <input type="text" wire:model="name" id="name"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                                <input type="email" wire:model="email" id="email"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-4">
-                                <label for="specialties"
-                                    class="block text-gray-700 text-sm font-bold mb-2">Specialties:</label>
-                                <input type="text" wire:model="specialties" id="specialties"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Yoga, CrossFit, etc.">
-                                @error('specialties') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-4">
-                                <label for="bio" class="block text-gray-700 text-sm font-bold mb-2">Bio:</label>
-                                <textarea wire:model="bio" id="bio"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-                                @error('bio') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button type="submit"
-                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                                Save
-                            </button>
-                            <button wire:click="closeModal" type="button"
-                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
+        <div class="modal modal-open">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg mb-4">{{ $trainer_id ? 'Edit Trainer' : 'Add New Trainer' }}</h3>
+                <form wire:submit.prevent="store">
+                    <div class="form-control w-full mb-4">
+                        <label class="label">
+                            <span class="label-text">Name</span>
+                        </label>
+                        <input type="text" wire:model="name" class="input input-bordered w-full" />
+                        @error('name') <span class="text-error text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="form-control w-full mb-4">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="email" wire:model="email" class="input input-bordered w-full" />
+                        @error('email') <span class="text-error text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="form-control w-full mb-4">
+                        <label class="label">
+                            <span class="label-text">Specialties</span>
+                        </label>
+                        <input type="text" wire:model="specialties" class="input input-bordered w-full"
+                            placeholder="Yoga, CrossFit, etc." />
+                        @error('specialties') <span class="text-error text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="form-control w-full mb-4">
+                        <label class="label">
+                            <span class="label-text">Bio</span>
+                        </label>
+                        <textarea wire:model="bio" class="textarea textarea-bordered h-24"></textarea>
+                        @error('bio') <span class="text-error text-sm">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="modal-action">
+                        <button type="button" wire:click="closeModal" class="btn btn-ghost">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     @endif
