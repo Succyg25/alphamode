@@ -36,43 +36,47 @@
     </div>
 
     <!-- Featured Plans -->
-    <h2 class="text-3xl font-bold text-center mb-8">Popular Membership Plans</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        @foreach($plans as $plan)
-            <div class="card bg-base-100 shadow-xl border border-base-300">
-                <div class="card-body items-center text-center">
-                    <h2 class="card-title text-2xl">{{ $plan->name }}</h2>
-                    <p class="text-4xl font-bold my-4">${{ $plan->price }}</p>
-                    <p class="text-gray-500 mb-4">{{ $plan->duration_days }} Days Access</p>
-                    <p class="mb-4">{{ Str::limit($plan->description, 100) }}</p>
-                    <div class="card-actions">
-                        <a href="{{ route('plans') }}" class="btn btn-outline btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-    <!-- Featured Trainers -->
-    <h2 class="text-3xl font-bold text-center mb-8">Meet Our Trainers</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        @foreach($featuredTrainers as $trainer)
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body items-center text-center">
-                    <div class="avatar placeholder mb-4">
-                        <div
-                            class="bg-neutral-focus text-neutral-content rounded-full w-24 h-24 flex items-center justify-center text-3xl font-bold">
-                            {{ substr($trainer->user->name, 0, 1) }}
+    @if($plans->isNotEmpty())
+        <h2 class="text-3xl font-bold text-center mb-8">Popular Membership Plans</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            @foreach($plans as $plan)
+                <div class="card bg-base-100 shadow-xl border border-base-300">
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title text-2xl">{{ $plan->name }}</h2>
+                        <p class="text-4xl font-bold my-4">${{ $plan->price }}</p>
+                        <p class="text-gray-500 mb-4">{{ $plan->duration_days }} Days Access</p>
+                        <p class="mb-4">{{ Str::limit($plan->description, 100) }}</p>
+                        <div class="card-actions">
+                            <a href="{{ route('plans') }}" class="btn btn-outline btn-primary">View Details</a>
                         </div>
                     </div>
-                    <h2 class="card-title">{{ $trainer->user->name }}</h2>
-                    <p class="italic text-primary">{{ $trainer->specialties }}</p>
-                    <p class="mt-2 text-sm">{{ Str::limit($trainer->bio, 80) }}</p>
-                    <div class="card-actions mt-4">
-                        <a href="{{ route('trainers') }}" class="btn btn-ghost btn-sm">View Profile</a>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+    <!-- Featured Trainers -->
+    @if($featuredTrainers->isNotEmpty())
+        <h2 class="text-3xl font-bold text-center mb-8">Meet Our Trainers</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach($featuredTrainers as $trainer)
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body items-center text-center">
+                        <div class="avatar placeholder mb-4">
+                            <div
+                                class="bg-neutral-focus text-neutral-content rounded-full w-24 h-24 flex items-center justify-center text-3xl font-bold">
+                                {{ substr($trainer->user->name, 0, 1) }}
+                            </div>
+                        </div>
+                        <h2 class="card-title">{{ $trainer->user->name }}</h2>
+                        <p class="italic text-primary">{{ $trainer->specialties }}</p>
+                        <p class="mt-2 text-sm">{{ Str::limit($trainer->bio, 80) }}</p>
+                        <div class="card-actions mt-4">
+                            <a href="{{ route('trainers') }}" class="btn btn-ghost btn-sm">View Profile</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @endif
 </div>

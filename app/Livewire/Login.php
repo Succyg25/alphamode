@@ -24,6 +24,13 @@ class Login extends Component
     {
         $this->validate();
 
+        $user = \App\Models\User::where('email', $this->email)->first();
+
+        if (!$user) {
+            session()->flash('feedback', 'Email not found.');
+            return;
+        }
+
         if (
             Auth::attempt([
                 'email' => $this->email,
@@ -39,7 +46,7 @@ class Login extends Component
             return redirect()->route('dashboard');
         }
 
-        session()->flash('feedback', 'Invalid Login Details.');
+        session()->flash('feedback', 'Incorrect password.');
     }
 
     public function render()
