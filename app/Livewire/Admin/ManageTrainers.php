@@ -11,7 +11,7 @@ use Livewire\Attributes\Layout;
 #[Layout('components.layouts.admin')]
 class ManageTrainers extends Component
 {
-    public $trainers, $name, $email, $bio, $specialties, $trainer_id;
+    public $trainers, $name, $email, $bio, $specialties, $trainer_id, $password;
     public $isModalOpen = false;
 
     public function render()
@@ -42,24 +42,37 @@ class ManageTrainers extends Component
         $this->email = '';
         $this->bio = '';
         $this->specialties = '';
+        $this->password = '';
         $this->trainer_id = null;
     }
 
     public function store()
     {
-        $this->validate([
+        $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . ($this->trainer_id ? Trainer::find($this->trainer_id)->user_id : ''),
             'bio' => 'nullable',
             'specialties' => 'nullable',
-        ]);
+        ];
+
+        if (!$this->trainer_id) {
+            $rules['password'] = 'required|min:6';
+        } else {
+            $rules['password'] = 'nullable|min:6';
+        }
+
+        $this->validate($rules);
 
         if ($this->trainer_id) {
             $trainer = Trainer::find($this->trainer_id);
-            $trainer->user->update([
+            $userData = [
                 'name' => $this->name,
                 'email' => $this->email,
-            ]);
+            ];
+            if ($this->password) {
+                $userData['password'] = Hash::make($this->password);
+            }
+            $trainer->user->update($userData);
             $trainer->update([
                 'bio' => $this->bio,
                 'specialties' => $this->specialties,
@@ -67,9 +80,9 @@ class ManageTrainers extends Component
         } else {
             $user = User::create([
                 'name' => $this->name,
-                'username' => explode('@', $this->email)[0] . rand(100, 999), // Generate a username
+                'username' => explode('@', $this->email)[0] . rand(100, 999),
                 'email' => $this->email,
-                'password' => Hash::make('password'), // Default password
+                'password' => Hash::make($this->password),
                 'role' => 'trainer',
             ]);
 

@@ -1,8 +1,8 @@
 <div class="p-6">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">Trainers Directory</h2>
+        <h2 class="text-2xl font-bold">Members Directory</h2>
         <button wire:click="create" class="btn btn-primary">
-            Add New Trainer
+            Add New Member
         </button>
     </div>
 
@@ -18,21 +18,21 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Specialties</th>
+                    <th>Joined Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($trainers as $trainer)
+                @foreach($members as $member)
                     <tr class="hover">
-                        <td>{{ $trainer->user->name ?? 'N/A' }}</td>
-                        <td>{{ $trainer->user->email ?? 'N/A' }}</td>
-                        <td>{{ $trainer->specialties }}</td>
+                        <td>{{ $member->name }}</td>
+                        <td>{{ $member->email }}</td>
+                        <td>{{ $member->created_at->format('M d, Y') }}</td>
                         <td class="gap-2 flex">
-                            <button wire:click="edit({{ $trainer->id }})"
+                            <button wire:click="edit({{ $member->id }})"
                                 class="btn btn-sm btn-ghost text-info">Edit</button>
-                            <button wire:click="delete({{ $trainer->id }})" class="btn btn-sm btn-ghost text-error"
-                                onclick="confirm('Are you sure? This will delete the user account.') || event.stopImmediatePropagation()">Delete</button>
+                            <button wire:click="delete({{ $member->id }})" class="btn btn-sm btn-ghost text-error"
+                                onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -44,7 +44,7 @@
     @if($isModalOpen)
         <div class="modal modal-open">
             <div class="modal-box">
-                <h3 class="font-bold text-lg mb-4">{{ $trainer_id ? 'Edit Trainer' : 'Add New Trainer' }}</h3>
+                <h3 class="font-bold text-lg mb-4">{{ $member_id ? 'Edit Member' : 'Add New Member' }}</h3>
                 <form wire:submit.prevent="store">
                     <div class="form-control w-full mb-4">
                         <label class="label">
@@ -64,28 +64,10 @@
 
                     <div class="form-control w-full mb-4">
                         <label class="label">
-                            <span class="label-text">Password
-                                {{ $trainer_id ? '(Leave blank to keep current)' : '' }}</span>
+                            <span class="label-text">Password {{ $member_id ? '(Leave blank to keep current)' : '' }}</span>
                         </label>
                         <input type="password" wire:model="password" class="input input-bordered w-full" />
                         @error('password') <span class="text-error text-sm">{{ $message }}</span>@enderror
-                    </div>
-
-                    <div class="form-control w-full mb-4">
-                        <label class="label">
-                            <span class="label-text">Specialties</span>
-                        </label>
-                        <input type="text" wire:model="specialties" class="input input-bordered w-full"
-                            placeholder="Yoga, CrossFit, etc." />
-                        @error('specialties') <span class="text-error text-sm">{{ $message }}</span>@enderror
-                    </div>
-
-                    <div class="form-control w-full mb-4">
-                        <label class="label">
-                            <span class="label-text">Bio</span>
-                        </label>
-                        <textarea wire:model="bio" class="textarea textarea-bordered h-24"></textarea>
-                        @error('bio') <span class="text-error text-sm">{{ $message }}</span>@enderror
                     </div>
 
                     <div class="modal-action">

@@ -31,7 +31,12 @@ class Login extends Component
             ])
         ) {
             session()->flash('feedback', 'Login Successful!');
-            return redirect()->to('/dashboard');
+
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            return redirect()->route('dashboard');
         }
 
         session()->flash('feedback', 'Invalid Login Details.');

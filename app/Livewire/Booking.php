@@ -43,7 +43,7 @@ class Booking extends Component
         // Basic booking logic
         BookingModel::create([
             'user_id' => Auth::id(),
-            'schedule_id' => $this->selectedSchedule->id,
+            'class_schedule_id' => $this->selectedSchedule->id,
         ]);
 
         session()->flash('feedback', 'Class booked successfully!');

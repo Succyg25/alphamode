@@ -22,9 +22,12 @@ Route::get('/careers', Jobs::class)->name('jobs');
 Route::get('/terms', Terms::class)->name('terms');
 Route::get('/privacy', Privacy::class)->name('privacy');
 Route::get('/register', Register::class)->name('register');
-Route::get('/login', Login::class)->name('login');
 Route::get('/plans', Plans::class)->name('plans');
 Route::get('/trainers', Trainers::class)->name('trainers');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', Login::class)->name('login');
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -47,5 +50,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/plans', \App\Livewire\Admin\ManagePlans::class)->name('admin.plans');
     Route::get('/admin/classes', \App\Livewire\Admin\ManageClasses::class)->name('admin.classes');
     Route::get('/admin/schedules', \App\Livewire\Admin\ManageSchedules::class)->name('admin.schedules');
+    Route::get('/admin/members', \App\Livewire\Admin\ManageMembers::class)->name('admin.members');
 
 });
