@@ -21,7 +21,11 @@
                     <p class="mb-8 text-gray-600">{{ $plan->description }}</p>
 
                     <div class="card-actions w-full">
-                        <button class="btn btn-primary btn-block rounded-full">Choose {{ $plan->name }}</button>
+                        <button wire:click="subscribe({{ $plan->id }})"
+                            wire:confirm="Are you sure you want to subscribe to {{ $plan->name }}?"
+                            class="btn btn-primary btn-block rounded-full">
+                            Choose {{ $plan->name }}
+                        </button>
                     </div>
                 </div>
             </div>

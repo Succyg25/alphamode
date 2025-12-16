@@ -38,7 +38,8 @@
                                             <td class="font-bold">{{ $booking->schedule->workoutClass->name }}</td>
                                             <td>{{ $booking->schedule->start_time->format('M d, Y') }}</td>
                                             <td>{{ $booking->schedule->start_time->format('H:i') }} -
-                                                {{ $booking->schedule->end_time->format('H:i') }}</td>
+                                                {{ $booking->schedule->end_time->format('H:i') }}
+                                            </td>
                                             <td>{{ $booking->schedule->workoutClass->trainer->user->name }}</td>
                                         </tr>
                                     @endforeach
@@ -61,16 +62,30 @@
         <!-- Sidebar -->
         <div class="space-y-8">
             <!-- Membership Status -->
-            <div class="card bg-primary text-primary-content shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Membership Status</h2>
-                    <p class="text-2xl font-bold">Active</p>
-                    <p class="text-sm opacity-80">Plan: Gold Member</p>
-                    <div class="card-actions justify-end mt-4">
-                        <a href="{{ route('subscription') }}" class="btn btn-sm btn-outline btn-white">Manage Subscription</a>
+            @if(Auth::user()->currentPlan)
+                <div class="card bg-primary text-primary-content shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Membership Status</h2>
+                        <p class="text-2xl font-bold">Active</p>
+                        <p class="text-sm opacity-80">Plan: {{ Auth::user()->currentPlan->name }}</p>
+                        <div class="card-actions justify-end mt-4">
+                            <a href="{{ route('subscription') }}" class="btn btn-sm btn-outline btn-white">Manage
+                                Subscription</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="card bg-warning text-warning-content shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Membership Status</h2>
+                        <p class="text-2xl font-bold">Inactive</p>
+                        <p class="text-sm opacity-80">No Active Plan</p>
+                        <div class="card-actions justify-end mt-4">
+                            <a href="{{ route('plans') }}" class="btn btn-sm btn-outline btn-black">Subscribe Now</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- Profile Quick Links -->
             <div class="card bg-base-100 shadow-xl">

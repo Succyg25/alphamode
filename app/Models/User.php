@@ -22,6 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'role',
+        'current_plan_id',
         'password',
     ];
 
@@ -56,6 +57,11 @@ class User extends Authenticatable
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function currentPlan()
+    {
+        return $this->belongsTo(Plan::class, 'current_plan_id');
     }
 
     public function isAdmin()
