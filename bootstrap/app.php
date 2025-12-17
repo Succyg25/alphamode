@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\CheckAdmin::class,
         ]);
 
+        $middleware->redirectGuestsTo(function () {
+            session()->flash('feedback', 'You need to log in to access this page.');
+            return route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

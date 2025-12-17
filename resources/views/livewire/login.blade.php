@@ -4,9 +4,9 @@
 
         <form wire:submit.prevent="loginUser" class="space-y-4">
             {{-- Flash Message --}}
-            @if (session()->has('feedback'))
+            @if (session()->has('feedback') || request()->has('feedback'))
                 <div role="alert" class="alert alert-primary alert-soft">
-                    <span>{{ session('feedback') }}</span>
+                    <span>{{ session('feedback') ?? request('feedback') }}</span>
                 </div>
             @endif
 

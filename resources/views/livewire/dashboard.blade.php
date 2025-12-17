@@ -63,7 +63,8 @@
         <div class="space-y-8">
             <!-- Membership Status -->
             @if(Auth::user()->currentPlan)
-                <div class="card bg-primary text-primary-content shadow-xl">
+                <div class="card shadow-xl {{ Auth::user()->currentPlan->text_color }} {{ Auth::user()->currentPlan->card_color ? '' : 'bg-primary' }}"
+                    style="{{ Auth::user()->currentPlan->card_color ? 'background-color: ' . Auth::user()->currentPlan->card_color : '' }}">
                     <div class="card-body">
                         <h2 class="card-title">Membership Status</h2>
                         <p class="text-2xl font-bold">Active</p>
