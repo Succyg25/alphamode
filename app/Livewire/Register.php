@@ -33,13 +33,11 @@ class Register extends Component
             'password' => bcrypt($this->password),
         ]);
 
-        $this->reset([
-            'username',
-            'email',
-            'password',
-        ]);
-
         session()->flash('feedback', 'Account Created Successfully!');
+
+        // Reset all form fields and validation
+        $this->reset(['username', 'email', 'password']);
+        $this->resetValidation();
     }
 
     public function render()

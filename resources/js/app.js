@@ -1,70 +1,46 @@
 import "./bootstrap";
+
 document.addEventListener("DOMContentLoaded", () => {
-    const html = document.documentElement;
-    const toggleBtn = document.getElementById("theme-toggle");
-    const sunIcon = document.getElementById("sun-icon");
-    const moonIcon = document.getElementById("moon-icon");
-
-    let theme = localStorage.getItem("theme") || "light";
-    html.setAttribute("data-theme", theme);
-
-    updateUI(theme);
-
-    toggleBtn?.addEventListener("click", () => {
-        theme = theme === "light" ? "dark" : "light";
-        html.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-        updateUI(theme);
-    });
-
-    function updateUI(theme) {
-        if (theme === "dark") {
-            sunIcon.classList.remove("hidden");
-            moonIcon.classList.add("hidden");
-
-            toggleBtn.classList.remove("btn-neutral");
-            toggleBtn.classList.add("btn-primary");
-        } else {
-            sunIcon.classList.add("hidden");
-            moonIcon.classList.remove("hidden");
-
-            toggleBtn.classList.remove("btn-primary");
-            toggleBtn.classList.add("btn-neutral");
-        }
-    }
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const html = document.documentElement;
+    // Icons & Toggle Button
     const toggleBtn = document.getElementById("theme-toggle");
     const lightIcon = document.getElementById("theme-toggle-light-icon");
     const darkIcon = document.getElementById("theme-toggle-dark-icon");
+    const html = document.documentElement;
 
-    if (!localStorage.getItem("theme")) {
-        const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
-        localStorage.setItem("theme", prefersDark ? "dark" : "light");
+    // Helper to apply theme
+    function applyTheme(isDark) {
+        if (isDark) {
+            html.classList.add("dark");
+            html.setAttribute("data-theme", "halloween");
+            if (lightIcon) lightIcon.classList.remove("hidden");
+            if (darkIcon) darkIcon.classList.add("hidden");
+            localStorage.setItem("color-theme", "dark");
+        } else {
+            html.classList.remove("dark");
+            html.setAttribute("data-theme", "light");
+            if (lightIcon) lightIcon.classList.add("hidden");
+            if (darkIcon) darkIcon.classList.remove("hidden");
+            localStorage.setItem("color-theme", "light");
+        }
     }
 
-    const theme = localStorage.getItem("theme") || "light";
-    html.setAttribute("data-theme", theme);
+    // Initial Check
+    const storedTheme = localStorage.getItem("color-theme");
+    const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    ).matches;
 
-    if (theme === "dark") {
-        lightIcon.classList.add("hidden");
-        darkIcon.classList.remove("hidden");
+    if (storedTheme === "dark" || (!storedTheme && systemDark)) {
+        applyTheme(true);
     } else {
-        lightIcon.classList.remove("hidden");
-        darkIcon.classList.add("hidden");
+        applyTheme(false);
     }
 
-    toggleBtn.addEventListener("click", () => {
-        const current = html.getAttribute("data-theme");
-        const newTheme = current === "dark" ? "light" : "dark";
-
-        html.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-
-        lightIcon.classList.toggle("hidden");
-        darkIcon.classList.toggle("hidden");
-    });
+    // Event Listener
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            const isDark = html.classList.contains("dark");
+            applyTheme(!isDark);
+        });
+    }
 });

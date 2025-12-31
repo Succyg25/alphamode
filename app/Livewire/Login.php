@@ -43,6 +43,10 @@ class Login extends Component
                 return redirect()->route('admin.dashboard');
             }
 
+            if (Auth::user()->isTrainer()) {
+                return redirect()->route('trainer.dashboard');
+            }
+
             return redirect()->route('dashboard');
         }
 

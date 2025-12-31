@@ -36,12 +36,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/subscription', Subscription::class)->name('subscription');
     Route::get('/booking/{trainer}', \App\Livewire\Booking::class)->name('booking');
+
+    Route::get('/payment/checkout/{plan}', [\App\Http\Controllers\PaymentController::class, 'show'])->name('payment.checkout');
+    Route::post('/payment/process', [\App\Http\Controllers\PaymentController::class, 'process'])->name('payment.process');
 });
 
 Route::post('/logout', function () {
     Illuminate\Support\Facades\Auth::logout();
     return redirect()->route('home');
 })->name('logout');
+
+Route::middleware(['auth', 'trainer'])->group(function () {
+    Route::get('/trainer/dashboard', \App\Livewire\Trainer\Dashboard::class)->name('trainer.dashboard');
+});
 
 Route::middleware('admin')->group(function () {
 

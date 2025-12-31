@@ -9,12 +9,25 @@ class Dashboard extends Component
 {
     public function render()
     {
-        // For now, simple mock of memberships or bookings
-        // In real app, we would query Auth::user()->bookings() etc.
-        $upcomingClasses = Auth::user()->bookings()->with('schedule.workoutClass')->get();
+        // Fetch upcoming classes (future bookings)
+        $upcomingClasses = Auth::user()->bookings()
+            ->with('schedule.workoutClass.trainer.user')
+            ->whereHas('schedule', function ($query) {
+                $query->where('start_time', '>', now());
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Fetch recent activity (recent bookings)
+        $recentActivity = Auth::user()->bookings()
+            ->with('schedule.workoutClass.trainer.user')
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get();
 
         return view('livewire.dashboard', [
             'upcomingClasses' => $upcomingClasses,
+            'recentActivity' => $recentActivity,
         ]);
     }
 }

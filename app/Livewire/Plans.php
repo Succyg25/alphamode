@@ -13,12 +13,7 @@ class Plans extends Component
             return redirect()->route('login');
         }
 
-        $user = auth()->user();
-        $user->current_plan_id = $planId;
-        $user->save();
-
-        session()->flash('message', 'You have successfully subscribed!');
-        return redirect()->route('dashboard');
+        return redirect()->route('payment.checkout', ['plan' => $planId]);
     }
 
     public function render()
