@@ -13,15 +13,15 @@
                 class="text-4xl font-display font-black bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent italic uppercase tracking-tighter">
                 Members Directory
             </h2>
-            <p class="text-xs font-black uppercase tracking-[0.3em] text-base-content/30 mt-2">BIOLOGICAL UNIT
+            <p class="text-xs font-bold uppercase tracking-wider text-base-content/30 mt-2">Member
                 Management</p>
         </div>
         <button wire:click="create"
             class="group relative h-14 px-8 rounded-2xl overflow-hidden shadow-xl transition-all active:scale-95">
             <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
             <div class="relative flex items-center gap-3">
-                <span class="font-display font-black uppercase tracking-widest text-sm text-primary-content">Induct New
-                    Unit</span>
+                <span class="font-display font-bold uppercase tracking-wider text-sm text-primary-content">Add New
+                    Member</span>
                 <svg class="w-5 h-5 text-primary-content" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                         d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -51,17 +51,17 @@
                 <thead>
                     <tr class="border-b border-base-content/5">
                         <th
-                            class="bg-transparent py-8 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 italic">
-                            Member Identity</th>
+                            class="bg-transparent py-8 px-8 text-[11px] font-bold text-base-content/40 uppercase tracking-widest">
+                            Member Profile</th>
                         <th
-                            class="bg-transparent py-8 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 italic">
-                            Communication Link</th>
+                            class="bg-transparent py-8 px-8 text-[11px] font-bold text-base-content/40 uppercase tracking-widest">
+                            Contact Details</th>
+                        <th <th
+                            class="bg-transparent py-8 px-8 text-[11px] font-bold text-base-content/40 uppercase tracking-widest">
+                            Join Date</th>
                         <th
-                            class="bg-transparent py-8 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 italic">
-                            Induction Timestamp</th>
-                        <th
-                            class="bg-transparent py-8 px-8 text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 italic text-right">
-                            Directives</th>
+                            class="bg-transparent py-8 px-8 text-[11px] font-bold text-base-content/40 uppercase tracking-widest text-right">
+                            Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-base-content/5">
@@ -84,10 +84,18 @@
                                     <div>
                                         <p
                                             class="font-bold text-base-content group-hover/row:text-emerald-500 transition-colors">
-                                            {{ $member->name }}</p>
-                                        <p
-                                            class="text-[10px] font-black uppercase tracking-widest text-base-content/30 italic">
-                                            Active Bio-Unit</p>
+                                            {{ $member->name }}
+                                        </p>
+                                        @if($member->isActive())
+                                            <p class="text-[10px] font-bold uppercase tracking-wider text-emerald-500">
+                                                Active Member</p>
+                                        @elseif($member->isPending())
+                                            <p class="text-[10px] font-bold uppercase tracking-wider text-warning">
+                                                Pending Verification</p>
+                                        @else
+                                            <p class="text-[10px] font-bold uppercase tracking-wider text-error">
+                                                Inactive Account</p>
+                                        @endif
                                     </div>
                                 </div>
                             </td>
@@ -99,8 +107,8 @@
                                     <span
                                         class="text-sm font-bold text-base-content">{{ $member->created_at->format('M d, Y') }}</span>
                                     <span
-                                        class="text-[10px] font-black text-emerald-500/60 uppercase tracking-tighter italic">Initial
-                                        Sync Done</span>
+                                        class="text-[10px] font-bold text-emerald-500/60 uppercase tracking-wider">Registration
+                                        Complete</span>
                                 </div>
                             </td>
                             <td class="py-6 px-8">
@@ -126,8 +134,8 @@
                     @empty
                         <tr>
                             <td colspan="4" class="py-20 text-center">
-                                <p class="text-xs font-black uppercase tracking-[0.4em] text-base-content/20">Zero Units
-                                    Inducted</p>
+                                <p class="text-xs font-bold uppercase tracking-wider text-base-content/20">No members
+                                    found</p>
                             </td>
                         </tr>
                     @endforelse
@@ -149,9 +157,10 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-display font-black uppercase tracking-tight italic">
-                            {{ $member_id ? 'Refine Unit' : 'Induct Unit' }}</h3>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/30">IDENTITY PARAMETERS
+                        <h3 class="text-2xl font-display font-bold uppercase tracking-tight">
+                            {{ $member_id ? 'Edit Member' : 'Add Member' }}
+                        </h3>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/30">Member Details
                         </p>
                     </div>
                 </div>
@@ -160,8 +169,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="form-control w-full">
                             <label class="label mb-2"><span
-                                    class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Unit
-                                    Designation</span></label>
+                                    class="label-text text-[10px] font-bold uppercase tracking-wider text-base-content/40">Full
+                                    Name</span></label>
                             <input type="text" wire:model="name"
                                 class="input bg-base-content/5 border-none focus:ring-2 focus:ring-emerald-500 h-14 rounded-2xl font-bold" />
                             @error('name') <span
@@ -170,8 +179,8 @@
 
                         <div class="form-control w-full">
                             <label class="label mb-2"><span
-                                    class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Communication
-                                    Hash (Email)</span></label>
+                                    class="label-text text-[10px] font-bold uppercase tracking-wider text-base-content/40">Email
+                                    Address</span></label>
                             <input type="email" wire:model="email"
                                 class="input bg-base-content/5 border-none focus:ring-2 focus:ring-emerald-500 h-14 rounded-2xl font-bold" />
                             @error('email') <span
@@ -181,8 +190,8 @@
 
                     <div class="form-control w-full">
                         <label class="label mb-2"><span
-                                class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Access
-                                Key {{ $member_id ? '(Optional)' : '' }}</span></label>
+                                class="label-text text-[10px] font-bold uppercase tracking-wider text-base-content/40">Password
+                                {{ $member_id ? '(Optional)' : '' }}</span></label>
                         <div class="relative w-full" x-data="{ show: false }">
                             <input :type="show ? 'text' : 'password'" wire:model="password"
                                 class="input bg-base-content/5 border-none focus:ring-2 focus:ring-emerald-500 h-14 rounded-2xl font-bold pr-14 w-full" />
@@ -213,8 +222,8 @@
                             class="group relative h-14 px-10 rounded-2xl overflow-hidden shadow-xl transition-all active:scale-95">
                             <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
                             <span
-                                class="relative font-display font-black uppercase tracking-widest text-sm text-primary-content">Synchronize
-                                Unit</span>
+                                class="relative font-display font-bold uppercase tracking-wider text-sm text-primary-content">Save
+                                Member</span>
                         </button>
                     </div>
                 </form>

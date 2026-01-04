@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone',
         'birth_date',
         'fitness_goals',
+        'membership_status',
         'password',
     ];
 
@@ -76,6 +77,21 @@ class User extends Authenticatable
     public function isTrainer()
     {
         return $this->role === 'trainer'; // or admin?
+    }
+
+    public function isPending()
+    {
+        return $this->membership_status === 'pending';
+    }
+
+    public function isActive()
+    {
+        return $this->membership_status === 'active';
+    }
+
+    public function isInactive()
+    {
+        return $this->membership_status === 'inactive';
     }
 
     public function workoutRoutines()

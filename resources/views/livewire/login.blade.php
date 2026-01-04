@@ -9,8 +9,8 @@
 
         <!-- Large Decorative Text -->
         <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] font-display font-black text-base-content/[0.02] uppercase tracking-[0.2em] select-none whitespace-nowrap italic -rotate-12">
-            Authenticate
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] font-display font-black text-base-content/[0.02] uppercase tracking-[0.1em] select-none whitespace-nowrap italic -rotate-12">
+            Sign In
         </div>
     </div>
 
@@ -26,15 +26,15 @@
                 <!-- Branding Header -->
                 <div class="text-center mb-12">
                     <div
-                        class="inline-block px-4 py-1.5 mb-6 text-[10px] font-black tracking-[0.4em] text-primary uppercase bg-primary/10 rounded-full italic">
-                        Gateway Access
+                        class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-widest text-primary uppercase bg-primary/10 rounded-full">
+                        Secure Authentication
                     </div>
                     <h2
                         class="text-5xl font-display font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent italic uppercase tracking-tighter mb-4">
                         Login
                     </h2>
-                    <p class="text-xs font-black uppercase tracking-[0.2em] text-base-content/40 leading-relaxed">
-                        Secure entry into the AlphaMode <br> Operational Ecosystem
+                    <p class="text-xs font-bold uppercase tracking-wider text-base-content/40 leading-relaxed">
+                        Secure entry into the AlphaMode <br> portal ecosystem
                     </p>
                 </div>
 
@@ -58,15 +58,15 @@
                         <div class="form-control w-full group/field">
                             <label class="label mb-2">
                                 <span
-                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-primary transition-colors italic">Comm-Link
-                                    Hash (Email)</span>
+                                    class="label-text text-[10px] font-bold uppercase tracking-wider text-base-content/40 group-focus-within/field:text-primary transition-colors">Email
+                                    Address</span>
                             </label>
                             <div class="relative">
                                 <input type="email" wire:model="email"
                                     class="input bg-base-content/5 border-none focus:ring-2 focus:ring-primary h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg"
                                     placeholder="Enter your email..." />
                             </div>
-                            @error('email')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">
+                            @error('email')<p class="text-error text-[10px] font-bold uppercase tracking-tighter mt-2">
                                 {{ $message }}
                             </p>@enderror
                         </div>
@@ -75,8 +75,8 @@
                         <div class="form-control w-full group/field">
                             <label class="label mb-2">
                                 <span
-                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-secondary transition-colors italic">Access
-                                    Key (Password)</span>
+                                    class="label-text text-[10px] font-bold uppercase tracking-wider text-base-content/40 group-focus-within/field:text-secondary transition-colors">Access
+                                    Password</span>
                             </label>
                             <div class="relative" x-data="{ show: false }">
                                 <input :type="show ? 'text' : 'password'" wire:model="password"
@@ -101,7 +101,7 @@
                                 </button>
                             </div>
                             @error('password')<p
-                                class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}
+                                class="text-error text-[10px] font-bold uppercase tracking-tighter mt-2">{{ $message }}
                             </p>@enderror
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                             </div>
                             <div class="relative flex items-center justify-center gap-4">
                                 <span
-                                    class="font-display font-black uppercase tracking-[0.3em] text-sm text-primary-content">Validate
-                                    Credentials</span>
+                                    class="font-display font-bold uppercase tracking-wider text-sm text-primary-content">Validate
+                                    Login</span>
                                 <svg class="w-6 h-6 text-primary-content group-hover/btn:translate-x-1 transition-transform"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -126,11 +126,11 @@
                     </div>
 
                     <div class="text-center pt-6">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/30 italic mb-4">
-                            Zero records found?</p>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/30 mb-4">
+                            Need an account?</p>
                         <a href="{{ route('register') }}"
                             class="text-xs font-bold text-primary hover:text-secondary uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
-                            <span>Initialize Registration</span>
+                            <span>Register Here</span>
                             <span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
                         </a>
                     </div>

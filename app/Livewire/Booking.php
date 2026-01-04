@@ -38,6 +38,11 @@ class Booking extends Component
 
     public function confirmBooking()
     {
+        if (!Auth::user()->isActive()) {
+            session()->flash('error', 'Only active members can book sessions. Please check your membership status.');
+            return redirect()->route('dashboard');
+        }
+
         if (!$this->selectedSchedule) {
             return;
         }

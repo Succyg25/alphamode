@@ -24,11 +24,11 @@
                             </svg>
                         </div>
                         <span
-                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Collective</span>
+                            class="text-xs font-bold uppercase tracking-wider text-base-content/30">Total Members</span>
                     </div>
 
                     <div>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Active
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/40 mb-1">Active
                             Population</p>
                         <h3
                             class="text-4xl font-display font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -60,11 +60,11 @@
                             </svg>
                         </div>
                         <span
-                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Momentum</span>
+                            class="text-xs font-bold uppercase tracking-wider text-base-content/30">Total Bookings</span>
                     </div>
 
                     <div>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Cycle
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/40 mb-1">Monthly
                             Sessions</p>
                         <h3
                             class="text-4xl font-display font-black bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
@@ -96,11 +96,11 @@
                             </svg>
                         </div>
                         <span
-                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Operators</span>
+                            class="text-xs font-bold uppercase tracking-wider text-base-content/30">Total Trainers</span>
                     </div>
 
                     <div>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Elite
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/40 mb-1">Elite
                             Personnel</p>
                         <h3
                             class="text-4xl font-display font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
@@ -132,11 +132,11 @@
                             </svg>
                         </div>
                         <span
-                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Capital</span>
+                            class="text-xs font-bold uppercase tracking-wider text-base-content/30">Total Revenue</span>
                     </div>
 
                     <div>
-                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Projected
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/40 mb-1">Projected
                             Inflow</p>
                         <h3 class="text-3xl font-display font-black text-white">
                             ${{ number_format($currentMonthRevenue, 2) }}
@@ -162,9 +162,9 @@
                         <div>
                             <h3
                                 class="text-2xl font-display font-black uppercase tracking-tighter text-base-content italic">
-                                Operational Schedule</h3>
-                            <p class="text-xs font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">Next
-                                Phase Synchronizations</p>
+                                Class Schedule</h3>
+                            <p class="text-xs font-bold uppercase tracking-wider text-base-content/30 mt-1">Upcoming
+                                Sessions</p>
                         </div>
                         <div class="w-12 h-12 bg-base-content/5 rounded-2xl flex items-center justify-center">
                             <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,9 +231,9 @@
                 <div
                     class="px-10 py-8 border-b border-base-content/5 bg-gradient-to-r from-emerald-500/5 to-transparent">
                     <h3 class="text-xl font-display font-black uppercase tracking-tighter text-base-content italic">
-                        Recent Inductees</h3>
-                    <p class="text-xs font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">Latest biological
-                        units Added</p>
+                        Recent Members</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-base-content/30 mt-1">Latest Members
+                        Added</p>
                 </div>
                 <div class="p-4 md:p-10">
                     <div class="space-y-4">
@@ -289,10 +289,10 @@
                                 <div class="w-2 h-2 rounded-full bg-primary animate-ping"></div>
                                 <h3
                                     class="text-lg font-display font-black uppercase tracking-tighter text-base-content italic">
-                                    Alpha Feed</h3>
+                                    Activity Feed</h3>
                             </div>
                             <p class="text-[10px] font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">
-                                Real-time Node Activity</p>
+                                Real-time User Activity</p>
                         </div>
 
                         <div class="flex-1 p-8 space-y-8 overflow-y-auto custom-scrollbar">
@@ -303,12 +303,12 @@
                                     </div>
 
                                     <div class="space-y-2">
-                                        <div class="text-[10px] font-black uppercase tracking-widest text-primary/70">
+                                        <div class="text-[10px] font-bold uppercase tracking-wider text-primary/70">
                                             {{ $activity->created_at->diffForHumans() }}
                                         </div>
                                         <p class="text-sm leading-relaxed text-base-content/80">
                                             <span class="font-bold text-base-content">{{ $activity->user->name }}</span>
-                                            committed to
+                                            booked
                                             <span
                                                 class="font-bold text-primary">{{ $activity->schedule->workoutClass->name }}</span>
                                         </p>
@@ -319,7 +319,7 @@
                                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <span
-                                                class="text-[10px] font-black uppercase tracking-widest text-base-content/40">
+                                                class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">
                                                 {{ $activity->schedule->start_time->format('H:i') }}
                                             </span>
                                         </div>

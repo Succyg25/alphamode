@@ -48,8 +48,8 @@
                                     </svg>
                                 </div>
                                 <div class="flex-grow">
-                                    <p class="text-sm font-black uppercase tracking-widest text-base-content/40 mb-1">
-                                        Our Location</p>
+                                    <p class="text-sm font-bold uppercase tracking-wider text-base-content/40 mb-1">
+                                        Location</p>
                                     <p class="text-lg font-bold">123 Fitness Street, Lagos, Nigeria</p>
                                 </div>
                             </div>
@@ -64,8 +64,8 @@
                                     </svg>
                                 </div>
                                 <div class="flex-grow">
-                                    <p class="text-sm font-black uppercase tracking-widest text-base-content/40 mb-1">
-                                        Let's Talk</p>
+                                    <p class="text-sm font-bold uppercase tracking-wider text-base-content/40 mb-1">
+                                        Phone</p>
                                     <p class="text-lg font-bold">+234 800 000 0000</p>
                                 </div>
                             </div>
@@ -80,8 +80,8 @@
                                     </svg>
                                 </div>
                                 <div class="flex-grow">
-                                    <p class="text-sm font-black uppercase tracking-widest text-base-content/40 mb-1">
-                                        Send a Mail</p>
+                                    <p class="text-sm font-bold uppercase tracking-wider text-base-content/40 mb-1">
+                                        Email</p>
                                     <p class="text-lg font-bold">support@alphamodegym.com</p>
                                 </div>
                             </div>
@@ -91,9 +91,9 @@
                         <div
                             class="mt-12 p-6 rounded-2xl bg-base-content/5 border border-dashed border-base-content/20">
                             <h4 class="font-display font-bold text-sm mb-2">Office Hours</h4>
-                            <p class="text-xs text-base-content/50 uppercase tracking-widest font-black">Mon - Fri: 6:00
+                            <p class="text-xs text-base-content/50 uppercase tracking-widest font-bold">Mon - Fri: 6:00
                                 AM - 10:00 PM</p>
-                            <p class="text-xs text-base-content/50 uppercase tracking-widest font-black mt-1">Sat - Sun:
+                            <p class="text-xs text-base-content/50 uppercase tracking-widest font-bold mt-1">Sat - Sun:
                                 8:00 AM - 6:00 PM</p>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                             <!-- Name -->
                             <div class="form-control group">
                                 <label class="label mb-2"><span
-                                        class="label-text text-xs font-black uppercase tracking-widest text-base-content/50">Your
+                                        class="label-text text-xs font-bold uppercase tracking-wider text-base-content/50">Your
                                         Name</span></label>
                                 <input type="text" wire:model="name"
                                     class="input input-bordered h-14 bg-base-100 rounded-2xl border-2 border-base-content/10 focus:border-primary group-hover:border-base-content/30 transition-all outline-none"
@@ -140,7 +140,7 @@
                             <!-- Email -->
                             <div class="form-control group">
                                 <label class="label mb-2"><span
-                                        class="label-text text-xs font-black uppercase tracking-widest text-base-content/50">Email
+                                        class="label-text text-xs font-bold uppercase tracking-wider text-base-content/50">Email
                                         Address</span></label>
                                 <input type="email" wire:model="email"
                                     class="input input-bordered h-14 bg-base-100 rounded-2xl border-2 border-base-content/10 focus:border-secondary group-hover:border-base-content/30 transition-all outline-none"
@@ -153,7 +153,7 @@
                         <!-- Message -->
                         <div class="form-control group">
                             <label class="label mb-2"><span
-                                    class="label-text text-xs font-black uppercase tracking-widest text-base-content/50">Message</span></label>
+                                    class="label-text text-xs font-bold uppercase tracking-wider text-base-content/50">Message</span></label>
                             <textarea wire:model="message"
                                 class="textarea textarea-bordered bg-base-100 rounded-2xl border-2 border-base-content/10 focus:border-accent group-hover:border-base-content/30 transition-all outline-none h-40 resize-none"
                                 required></textarea>
@@ -168,8 +168,8 @@
                                 </div>
                                 <div class="relative flex items-center justify-center gap-3">
                                     <span
-                                        class="button-text font-display font-black uppercase tracking-[0.2em] text-sm text-primary-content">
-                                        Deploy Message
+                                        class="button-text font-display font-bold uppercase tracking-wider text-sm text-primary-content">
+                                        Send Message
                                     </span>
                                     <svg class="w-5 h-5 text-primary-content transition-transform duration-500 group-hover:translate-x-2"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">

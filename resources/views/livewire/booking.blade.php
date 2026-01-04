@@ -22,13 +22,14 @@
     <div class="max-w-5xl mx-auto relative z-10">
         <!-- Header Section -->
         <div class="mb-16 text-center">
-            <h2 class="text-xs font-black uppercase tracking-[0.4em] text-primary mb-4 italic">Protocol Engagement</h2>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-primary mb-4">
+                Schedule Session</h2>
             <h1
                 class="text-6xl font-display font-black italic uppercase tracking-tighter bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-6">
                 Book with {{ $trainer->user->name }}
             </h1>
-            <p class="text-base-content/60 max-w-2xl mx-auto uppercase tracking-widest text-sm font-bold italic">
-                Select a temporal window for your upcoming physical induction.
+            <p class="text-base-content/60 max-w-2xl mx-auto uppercase tracking-wider text-sm font-bold">
+                Select a time slot for your upcoming training session.
             </p>
         </div>
 
@@ -45,7 +46,7 @@
                             <!-- Class Identifier -->
                             <div class="flex items-center justify-between mb-6">
                                 <span
-                                    class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-lg italic">
+                                    class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-lg">
                                     {{ $schedule->workoutClass->name }}
                                 </span>
                                 <div class="w-2 h-2 rounded-full bg-primary animate-ping"></div>
@@ -53,11 +54,10 @@
 
                             <!-- Temporal Details -->
                             <div class="mb-8">
-                                <h3
-                                    class="text-2xl font-display font-black italic uppercase tracking-tighter text-base-content mb-2">
+                                <h3 class="text-2xl font-display font-bold uppercase tracking-tight text-base-content mb-2">
                                     {{ $schedule->start_time->format('l, M d') }}
                                 </h3>
-                                <div class="flex items-center gap-2 text-base-content/60 font-bold italic text-sm">
+                                <div class="flex items-center gap-2 text-base-content/60 font-medium text-sm">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -70,14 +70,14 @@
                             <div class="mt-auto pt-6 border-t border-base-content/5 flex items-center justify-between">
                                 <div class="flex flex-col">
                                     <span
-                                        class="text-[10px] font-black uppercase tracking-widest text-base-content/40 italic">Capacity</span>
+                                        class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">Capacity</span>
                                     <span
                                         class="text-lg font-display font-black italic text-primary">{{ $schedule->workoutClass->capacity }}
                                         Units</span>
                                 </div>
                                 <button wire:click="selectSchedule({{ $schedule->id }})"
-                                    class="h-12 px-6 bg-primary hover:bg-primary-focus text-primary-content font-black uppercase tracking-widest italic rounded-2xl shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
-                                    Init Selection
+                                    class="h-12 px-6 bg-primary hover:bg-primary-focus text-primary-content font-bold uppercase tracking-wider rounded-2xl shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                                    Book Session
                                 </button>
                             </div>
                         </div>
@@ -85,11 +85,11 @@
                 @empty
                     <div
                         class="col-span-full h-64 flex flex-col items-center justify-center bg-base-100/20 backdrop-blur-xl border border-base-content/5 border-dashed rounded-[3rem]">
-                        <p class="text-base-content/40 font-black uppercase tracking-[0.2em] italic mb-6">No temporal windows
+                        <p class="text-base-content/40 font-bold uppercase tracking-wider">No sessions
                             active</p>
                         <a href="{{ route('trainers') }}"
-                            class="h-12 px-8 flex items-center bg-base-content/5 hover:bg-base-content/10 text-base-content font-black uppercase tracking-widest italic rounded-2xl transition-all">
-                            Return to Personnel
+                            class="h-12 px-8 flex items-center bg-base-content/5 hover:bg-base-content/10 text-base-content font-bold uppercase tracking-wider rounded-2xl transition-all">
+                            Return to Trainers
                         </a>
                     </div>
                 @endforelse
@@ -117,12 +117,11 @@
                                 </div>
                             </div>
                             <div>
-                                <h3
-                                    class="text-3xl font-display font-black italic uppercase tracking-tighter text-base-content">
-                                    Validate Engagement
+                                <h3 class="text-3xl font-display font-bold uppercase tracking-tight text-base-content">
+                                    Confirm Session
                                 </h3>
-                                <p class="text-base-content/40 font-bold uppercase tracking-widest text-[10px] italic">Final
-                                    induction confirmation</p>
+                                <p class="text-base-content/40 font-bold uppercase tracking-wider text-[10px]">Final
+                                    booking confirmation</p>
                             </div>
                         </div>
 
@@ -130,32 +129,31 @@
                         <div class="space-y-6 mb-12">
                             <div
                                 class="flex items-center justify-between p-6 bg-base-content/5 rounded-2xl border border-base-content/5">
-                                <span
-                                    class="text-[10px] font-black uppercase tracking-widest text-base-content/40 italic">Assigned
-                                    Unit</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">Selected
+                                    Class</span>
                                 <span
                                     class="text-xl font-display font-black italic text-base-content uppercase tracking-tight">{{ $selectedSchedule->workoutClass->name }}</span>
                             </div>
                             <div
                                 class="flex items-center justify-between p-6 bg-base-content/5 rounded-2xl border border-base-content/5">
-                                <span
-                                    class="text-[10px] font-black uppercase tracking-widest text-base-content/40 italic">Lead
-                                    Personnel</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">Your
+                                    Trainer</span>
                                 <span
                                     class="text-xl font-display font-black italic text-primary uppercase tracking-tight">{{ $trainer->user->name }}</span>
                             </div>
                             <div
                                 class="flex items-center justify-between p-6 bg-base-content/5 rounded-2xl border border-base-content/5">
-                                <span
-                                    class="text-[10px] font-black uppercase tracking-widest text-base-content/40 italic">Temporal
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">Time
                                     Slot</span>
                                 <div class="text-right">
                                     <div
                                         class="text-xl font-display font-black italic text-base-content uppercase tracking-tight">
-                                        {{ $selectedSchedule->start_time->format('l, M d, Y') }}</div>
+                                        {{ $selectedSchedule->start_time->format('l, M d, Y') }}
+                                    </div>
                                     <div class="text-[11px] font-black text-primary uppercase tracking-widest italic">
                                         {{ $selectedSchedule->start_time->format('H:i') }} -
-                                        {{ $selectedSchedule->end_time->format('H:i') }} HRS</div>
+                                        {{ $selectedSchedule->end_time->format('H:i') }} HRS
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,23 +167,22 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col">
-                                <span
-                                    class="text-[10px] font-black uppercase tracking-widest text-primary italic mb-1">Induction
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">Session
                                     Protocol</span>
-                                <p class="text-sm font-bold text-base-content/60 italic leading-relaxed">Please ensure
-                                    arrival exactly 15 minutes prior to induction start for synchronization.</p>
+                                <p class="text-sm font-medium text-base-content/60 leading-relaxed">Please ensure
+                                    arrival 15 minutes prior to session start.</p>
                             </div>
                         </div>
 
                         <!-- Action Controls -->
                         <div class="flex flex-col sm:flex-row gap-4">
                             <button wire:click="confirmBooking"
-                                class="flex-1 h-16 bg-gradient-to-r from-primary to-accent hover:scale-[1.02] active:scale-[0.98] text-primary-content font-black uppercase tracking-[0.2em] italic rounded-2xl shadow-2xl shadow-primary/20 transition-all duration-300">
-                                Validate Engagement
+                                class="flex-1 h-16 bg-gradient-to-r from-primary to-accent hover:scale-[1.02] active:scale-[0.98] text-primary-content font-bold uppercase tracking-wider rounded-2xl shadow-2xl shadow-primary/20 transition-all duration-300">
+                                Confirm Booking
                             </button>
                             <button wire:click="$set('step', 1)"
-                                class="h-16 px-8 bg-base-content/5 hover:bg-base-content/10 text-base-content/40 hover:text-base-content font-black uppercase tracking-widest italic rounded-2xl transition-all duration-300">
-                                Decline Protocol
+                                class="h-16 px-8 bg-base-content/5 hover:bg-base-content/10 text-base-content/40 hover:text-base-content font-bold uppercase tracking-wider rounded-2xl transition-all duration-300">
+                                Cancel
                             </button>
                         </div>
                     </div>

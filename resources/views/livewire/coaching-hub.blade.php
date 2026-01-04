@@ -25,8 +25,8 @@
                     </div>
                     <div class="lg:w-1/3 p-8 flex flex-col justify-center">
                         <span
-                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4 w-fit">
-                            Featured Video
+                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4 w-fit">
+                            Featured Spotlight
                         </span>
                         <h2 class="text-3xl font-bold mb-4">{{ $featured->title }}</h2>
                         <p class="text-base-content/70 mb-6 line-clamp-4">
@@ -98,7 +98,7 @@
                     <div class="card-body p-6">
                         <div class="flex justify-between items-start mb-2">
                             <span
-                                class="text-[10px] font-bold uppercase tracking-widest text-primary">{{ $video->category }}</span>
+                                class="text-[10px] font-bold text-primary uppercase tracking-wider">{{ $video->category }}</span>
                             <div class="flex items-center gap-1 text-[10px] opacity-60">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

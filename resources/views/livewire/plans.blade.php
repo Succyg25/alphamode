@@ -8,7 +8,7 @@
 
     <div class="text-center mb-20 relative">
         <div
-            class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-primary uppercase bg-primary/10 rounded-full">
+            class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-primary bg-primary/10 rounded-full">
             Pricing & Plans
         </div>
         <h1
@@ -35,7 +35,7 @@
                     </div>
                     <div class="absolute top-0 right-10 transform -translate-y-1/2 z-20">
                         <span
-                            class="bg-gradient-to-r from-primary to-secondary text-primary-content text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-xl shadow-primary/20">
+                            class="bg-gradient-to-r from-primary to-secondary text-primary-content text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-xl shadow-primary/20">
                             Most Popular
                         </span>
                     </div>
@@ -45,7 +45,7 @@
                     class="relative h-full flex flex-col bg-base-100/80 backdrop-blur-xl p-10 rounded-[2rem] border border-base-content/5 shadow-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-primary/10">
 
                     <div class="mb-10 text-center">
-                        <h2 class="text-xs font-black uppercase tracking-widest text-primary mb-4">{{ $plan->name }}</h2>
+                        <h2 class="text-sm font-bold text-primary mb-4">{{ $plan->name }}</h2>
                         <div class="flex items-baseline justify-center gap-1">
                             <span class="text-2xl font-bold text-base-content/40">$</span>
                             <span
@@ -53,7 +53,7 @@
                             <span
                                 class="text-xl font-bold text-base-content/40">.{{ substr(number_format($plan->price, 2), -2) }}</span>
                         </div>
-                        <p class="mt-4 text-sm font-bold text-base-content/50 uppercase tracking-widest">
+                        <p class="mt-4 text-[11px] font-bold text-base-content/50 uppercase tracking-widest">
                             {{ $plan->duration_days }} Days Access
                         </p>
                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="relative flex items-center justify-center gap-2 h-full">
                                 <span
-                                    class="font-display font-black uppercase tracking-widest text-sm {{ $isFeatured ? 'text-primary-content' : 'text-base-content' }}">
+                                    class="font-display font-bold uppercase tracking-wider text-sm {{ $isFeatured ? 'text-primary-content' : 'text-base-content' }}">
                                     Choose {{ explode(' ', $plan->name)[0] }}
                                 </span>
                                 <svg class="w-4 h-4 {{ $isFeatured ? 'text-primary-content' : 'text-base-content' }} group-hover/btn:translate-x-1 transition-transform"

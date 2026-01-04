@@ -10,11 +10,11 @@
     <div class="text-center mb-16 relative">
         <div
             class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-primary uppercase bg-primary/10 rounded-full">
-            Membership Hub
+            Membership Settings
         </div>
         <h1
             class="text-5xl font-display font-black mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            Manage Your Journey
+            Current Membership
         </h1>
         <p class="text-xl text-base-content/60 max-w-2xl mx-auto leading-relaxed">
             Review your current status, upgrade your experience, or adjust your
@@ -33,8 +33,8 @@
                     </div>
                     <div
                         class="relative bg-base-100/60 backdrop-blur-xl p-8 rounded-3xl border border-base-content/5 shadow-2xl text-center">
-                        <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-3">Active Tier</p>
-                        <p class="text-3xl font-display font-black text-primary">{{ Auth::user()->currentPlan->name }}</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-3">Active Plan</p>
+                        <p class="text-3xl font-display font-bold text-primary">{{ Auth::user()->currentPlan->name }}</p>
                     </div>
                 </div>
 
@@ -44,9 +44,10 @@
                     </div>
                     <div
                         class="relative bg-base-100/60 backdrop-blur-xl p-8 rounded-3xl border border-base-content/5 shadow-2xl text-center">
-                        <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-3">Access Level</p>
-                        <p class="text-3xl font-display font-black text-secondary">
-                            {{ Auth::user()->currentPlan->duration_days }} Days</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-3">Access Period</p>
+                        <p class="text-3xl font-display font-bold text-secondary">
+                            {{ Auth::user()->currentPlan->duration_days }} Days
+                        </p>
                     </div>
                 </div>
 
@@ -56,12 +57,12 @@
                     </div>
                     <div
                         class="relative bg-base-100/60 backdrop-blur-xl p-8 rounded-3xl border border-base-content/5 shadow-2xl text-center">
-                        <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-3">Monthly Investment
+                        <p class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-3">Monthly Rate
                         </p>
                         <div class="flex items-baseline justify-center gap-1">
                             <span class="text-lg font-bold text-accent">$</span>
                             <span
-                                class="text-3xl font-display font-black text-accent">{{ floor(Auth::user()->currentPlan->price) }}</span>
+                                class="text-3xl font-display font-bold text-accent">{{ floor(Auth::user()->currentPlan->price) }}</span>
                             <span
                                 class="text-sm font-bold text-accent">.{{ substr(number_format(Auth::user()->currentPlan->price, 2), -2) }}</span>
                         </div>
@@ -82,14 +83,14 @@
                         </div>
                         <div class="flex items-center gap-4">
                             <span class="w-3 h-3 bg-success rounded-full animate-pulse shadow-sm shadow-success/40"></span>
-                            <span class="text-sm font-black uppercase tracking-widest text-success">Plan Synchronized</span>
+                            <span class="text-sm font-bold uppercase tracking-wider text-success">Active Plan</span>
                         </div>
                     </div>
 
                     <!-- Perks Section -->
                     <div class="grid md:grid-cols-2 gap-12 mb-12 border-y border-base-content/5 py-12">
                         <div class="space-y-6">
-                            <h3 class="text-sm font-black uppercase tracking-widest text-primary">Your Membership Perks</h3>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Your Membership Perks</h3>
                             <div class="space-y-4">
                                 @php
                                     $perks = explode("\n", Auth::user()->currentPlan->description);
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                         <div class="p-8 rounded-3xl bg-base-content/5 border border-dashed border-base-content/10">
-                            <h3 class="text-sm font-black uppercase tracking-widest text-base-content/40 mb-4">Pro Tip</h3>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-base-content/40 mb-4">Motivation</h3>
                             <p class="text-sm text-base-content/60 leading-relaxed italic">
                                 "Consistency is the key to transformation. Your current plan gives you all the tools needed
                                 to reach your goals. Keep pushing, member!"
@@ -129,7 +130,7 @@
                             <div class="relative flex items-center justify-center gap-2 h-full">
                                 <span
                                     class="font-display font-black uppercase tracking-widest text-sm text-primary-content">
-                                    Switch Plan
+                                    Change Plan
                                 </span>
                                 <svg class="w-4 h-4 text-primary-content transition-transform group-hover/btn:translate-x-1"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +146,7 @@
                             <div class="flex items-center justify-center gap-2 h-full">
                                 <span
                                     class="font-display font-black uppercase tracking-widest text-sm text-base-content/40 group-hover/btn:text-error transition-colors">
-                                    Terminate Plan
+                                    Cancel Subscription
                                 </span>
                                 <svg class="w-4 h-4 text-base-content/40 group-hover/btn:text-error transition-colors"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">

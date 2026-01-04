@@ -47,15 +47,15 @@
                         <!-- Desktop Navigation -->
                         <div class="hidden lg:flex items-center gap-1">
                             <a href="{{ route('home') }}"
-                                class="px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic {{ request()->routeIs('home') ? 'text-primary' : '' }}">Home</a>
+                                class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors {{ request()->routeIs('home') ? 'text-primary' : '' }}">Home</a>
                             <a href="{{ route('plans') }}"
-                                class="px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic {{ request()->routeIs('plans') ? 'text-primary' : '' }}">Plans</a>
+                                class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors {{ request()->routeIs('plans') ? 'text-primary' : '' }}">Plans</a>
                             <a href="{{ route('trainers') }}"
-                                class="px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic {{ request()->routeIs('trainers') ? 'text-primary' : '' }}">Trainers</a>
+                                class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors {{ request()->routeIs('trainers') ? 'text-primary' : '' }}">Trainers</a>
                             <a href="{{ route('coaching.hub') }}"
-                                class="px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic {{ request()->routeIs('coaching.hub') ? 'text-primary' : '' }}">Coaching</a>
+                                class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors {{ request()->routeIs('coaching.hub') ? 'text-primary' : '' }}">Coaching Hub</a>
                             <a href="{{ route('contact') }}"
-                                class="px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic {{ request()->routeIs('contact') ? 'text-primary' : '' }}">Contact Us</a>
+                                class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors {{ request()->routeIs('contact') ? 'text-primary' : '' }}">Contact Us</a>
                         </div>
 
                         <!-- Control Cluster -->
@@ -77,14 +77,14 @@
                             @guest
                                 <div class="hidden sm:flex items-center gap-3">
                                     <a href="{{ route('login') }}"
-                                        class="px-5 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-base-content/60 hover:text-primary transition-colors italic">Login</a>
+                                        class="px-5 py-2 text-sm font-semibold text-base-content/60 hover:text-primary transition-colors">Login</a>
                                     <a href="{{ route('register') }}"
                                         class="relative h-10 px-6 rounded-xl overflow-hidden group/reg">
                                         <div
                                             class="absolute inset-0 bg-gradient-to-r from-primary to-accent group-hover/reg:scale-110 transition-transform">
                                         </div>
                                         <span
-                                            class="relative flex items-center justify-center h-full text-[10px] font-black uppercase tracking-[0.2em] text-primary-content italic">Register</span>
+                                            class="relative flex items-center justify-center h-full text-sm font-bold text-primary-content">Register</span>
                                     </a>
                                 </div>
                             @endguest
@@ -103,7 +103,7 @@
                                             <!-- Green Online Dot -->
                                             <div class="absolute bottom-0 right-0 w-3 h-3 bg-success border-2 border-base-100 rounded-full"></div>
                                         </a>
-                                        <span class="text-[9px] font-black uppercase tracking-[0.1em] text-base-content/40 group-hover/user:text-primary transition-colors italic">
+                                        <span class="text-[11px] font-bold text-base-content/40 group-hover/user:text-primary transition-colors">
                                             {{ auth()->user()->name }}
                                         </span>
                                     </div>
@@ -111,7 +111,7 @@
                                     <div class="flex items-center gap-2">
                                         @if(auth()->user()->isAdmin())
                                             <a href="{{ route('admin.dashboard') }}" class="hidden sm:flex h-10 px-5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 items-center gap-2 rounded-xl transition-all">
-                                                <span class="text-[9px] font-black uppercase tracking-[0.2em] italic">Admin Hub</span>
+                                                <span class="text-[10px] font-bold uppercase tracking-wider">Admin Hub</span>
                                             </a>
                                         @endif
                                         
@@ -156,31 +156,31 @@
                         <div class="flex flex-col gap-2">
                             <a href="{{ route('home') }}"
                                 class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                <span class="text-xs font-black uppercase tracking-widest italic">Home</span>
+                                <span class="text-sm font-semibold">Home</span>
                             </a>
                             <a href="{{ route('plans') }}"
                                 class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                <span class="text-xs font-black uppercase tracking-widest italic">Membership Plans</span>
+                                <span class="text-sm font-semibold">Membership Plans</span>
                             </a>
                             @auth
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('admin.payments') }}"
                                        class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                        <span class="text-xs font-black uppercase tracking-widest italic">Manual Payments</span>
+                                        <span class="text-sm font-semibold">Manual Payments</span>
                                     </a>
                                 @endif
                             @endauth
                             <a href="{{ route('trainers') }}"
                                 class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                <span class="text-xs font-black uppercase tracking-widest italic">Our Personnel</span>
+                                <span class="text-sm font-semibold">Our Personnel</span>
                             </a>
                             <a href="{{ route('coaching.hub') }}"
                                 class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                <span class="text-xs font-black uppercase tracking-widest italic">Coaching Hub</span>
+                                <span class="text-sm font-semibold">Coaching Hub</span>
                             </a>
                             <a href="{{ route('contact') }}"
                                 class="flex items-center gap-3 px-6 py-4 rounded-2xl hover:bg-primary/10 text-base-content/60 hover:text-primary transition-all">
-                                <span class="text-xs font-black uppercase tracking-widest italic">Comm-Link</span>
+                                <span class="text-sm font-semibold">Contact Support</span>
                             </a>
                             @auth
                                 <div class="mt-4 pt-4 border-t border-base-content/5 flex items-center justify-between gap-4">
@@ -190,13 +190,13 @@
                                                 @if(auth()->user()->profile_photo)
                                                     <img src="{{ auth()->user()->profile_photo_url }}" class="w-full h-full object-cover">
                                                 @else
-                                                    <span class="text-sm font-black text-primary uppercase">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                                                    <span class="text-sm font-bold text-primary">{{ substr(auth()->user()->name, 0, 1) }}</span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="flex flex-col">
-                                            <span class="text-sm font-black text-base-content uppercase tracking-widest italic">{{ auth()->user()->name }}</span>
-                                            <span class="text-[10px] font-bold text-base-content/40 uppercase tracking-tighter italic">Active Unit</span>
+                                            <span class="text-sm font-bold text-base-content">{{ auth()->user()->name }}</span>
+                                            <span class="text-[10px] font-medium text-base-content/40 uppercase tracking-wider">Active Member</span>
                                         </div>
                                     </div>
                                     

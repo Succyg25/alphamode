@@ -33,22 +33,22 @@
             <div
                 class="text-center p-8 bg-base-100/60 backdrop-blur-xl rounded-3xl border border-base-content/5 hover-lift">
                 <div class="text-5xl font-black text-primary mb-2">1.2k+</div>
-                <div class="text-sm font-bold uppercase tracking-widest text-base-content/40">Active Members</div>
+                <div class="text-sm font-bold uppercase tracking-wider text-base-content/40">Active Members</div>
             </div>
             <div
                 class="text-center p-8 bg-base-100/60 backdrop-blur-xl rounded-3xl border border-base-content/5 hover-lift">
                 <div class="text-5xl font-black text-secondary mb-2">15+</div>
-                <div class="text-sm font-bold uppercase tracking-widest text-base-content/40">Expert Trainers</div>
+                <div class="text-sm font-bold uppercase tracking-wider text-base-content/40">Expert Trainers</div>
             </div>
             <div
                 class="text-center p-8 bg-base-100/60 backdrop-blur-xl rounded-3xl border border-base-content/5 hover-lift">
                 <div class="text-5xl font-black text-accent mb-2">50+</div>
-                <div class="text-sm font-bold uppercase tracking-widest text-base-content/40">Weekly Classes</div>
+                <div class="text-sm font-bold uppercase tracking-wider text-base-content/40">Weekly Classes</div>
             </div>
             <div
                 class="text-center p-8 bg-base-100/60 backdrop-blur-xl rounded-3xl border border-base-content/5 hover-lift">
                 <div class="text-5xl font-black text-primary mb-2">98%</div>
-                <div class="text-sm font-bold uppercase tracking-widest text-base-content/40">Satisfaction Rate</div>
+                <div class="text-sm font-bold uppercase tracking-wider text-base-content/40">Satisfaction Rate</div>
             </div>
         </div>
     </div>
@@ -64,7 +64,8 @@
                 <div class="relative z-10">
                     <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-display font-bold mb-4">Our Mission</h3>
@@ -84,8 +85,10 @@
                 <div class="relative z-10">
                     <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-display font-bold mb-4">Our Vision</h3>
@@ -104,7 +107,8 @@
                 <div class="relative z-10">
                     <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-display font-bold mb-4">Our Values</h3>
@@ -132,7 +136,8 @@
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-2xl premium-gradient-1 flex items-center justify-center">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                         </svg>
                     </div>
                 </div>
@@ -150,7 +155,8 @@
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-2xl premium-gradient-2 flex items-center justify-center">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
                 </div>
@@ -168,7 +174,8 @@
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-2xl premium-gradient-3 flex items-center justify-center">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                 </div>
@@ -186,7 +193,8 @@
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-2xl premium-gradient-1 flex items-center justify-center">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                 </div>
@@ -220,11 +228,11 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('register') }}"
-                        class="btn bg-white text-primary border-none rounded-2xl px-10 h-14 font-black uppercase tracking-widest hover:bg-white/90 transform hover:-translate-y-1 transition-all shadow-xl">
+                        class="btn bg-white text-primary border-none rounded-2xl px-10 h-14 font-bold uppercase tracking-wider hover:bg-white/90 transform hover:-translate-y-1 transition-all shadow-xl">
                         Start Your Journey
                     </a>
                     <a href="{{ route('trainers') }}"
-                        class="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-primary rounded-2xl px-10 h-14 font-black uppercase tracking-widest transform hover:-translate-y-1 transition-all">
+                        class="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-primary rounded-2xl px-10 h-14 font-bold uppercase tracking-wider transform hover:-translate-y-1 transition-all">
                         Meet Our Trainers
                     </a>
                 </div>

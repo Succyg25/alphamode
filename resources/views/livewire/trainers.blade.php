@@ -11,7 +11,7 @@
     <!-- Page Header -->
     <div class="text-center mb-20 relative">
         <div
-            class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-primary uppercase bg-primary/10 rounded-full">
+            class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-primary bg-primary/10 rounded-full">
             Elite Squad
         </div>
         <h1
@@ -57,7 +57,7 @@
                         <h3 class="text-xl font-display font-bold text-base-content mb-1">
                             {{ $trainer->user->name }}
                         </h3>
-                        <p class="text-xs font-black uppercase tracking-widest text-primary mb-4 opacity-80">
+                        <p class="text-[11px] font-bold text-primary mb-4 opacity-80">
                             {{ $trainer->specialties }}
                         </p>
                         <p class="text-sm text-base-content/60 leading-relaxed line-clamp-2 mb-6">
@@ -68,7 +68,7 @@
                         <div class="px-2">
                             <div class="flex items-center justify-center gap-2 mb-3">
                                 <span class="material-symbols-outlined text-sm text-primary">schedule</span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-base-content/40">Available
+                                <span class="text-[10px] font-bold text-base-content/40 uppercase tracking-wider">Available
                                     Slots</span>
                             </div>
                             <div class="flex flex-wrap justify-center gap-2">
@@ -103,12 +103,11 @@
                                 class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90 group-hover:opacity-100 transition-opacity">
                             </div>
                             <div class="relative flex items-center gap-2">
-                                <span
-                                    class="text-sm font-display font-black uppercase tracking-widest text-primary-content">
+                                <span class="text-sm font-display font-bold uppercase tracking-wider text-primary-content">
                                     Book Now
                                 </span>
                                 <span
-                                    class="material-symbols-outlined text-primary-content text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                                    class="material-symbols-outlined text-primary-content text-[18px] group-hover/btn:translate-x-1 transition-transform"></span>
                             </div>
                         </a>
                     </div>
@@ -138,7 +137,7 @@
                     </p>
                 </div>
                 <a href="{{ route('contact') }}"
-                    class="btn btn-white bg-white text-primary border-none rounded-2xl px-8 font-black uppercase tracking-widest hover:bg-white/90 transform hover:-translate-y-1 transition-all">
+                    class="btn btn-white bg-white text-primary border-none rounded-2xl px-8 font-bold uppercase tracking-wider hover:bg-white/90 transform hover:-translate-y-1 transition-all">
                     Find My Trainer
                 </a>
             </div>

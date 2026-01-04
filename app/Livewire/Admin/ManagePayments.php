@@ -6,6 +6,9 @@ use App\Models\PaymentTransaction;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PaymentApproved;
+use App\Mail\PaymentRejected;
 
 #[Title('Manage Payments')]
 class ManagePayments extends Component
@@ -19,14 +22,18 @@ class ManagePayments extends Component
     {
         $transaction = PaymentTransaction::findOrFail($transactionId);
 
-        // Update user plan
+        // Update user plan and status
         $user = $transaction->user;
         $user->current_plan_id = $transaction->plan_id;
+        $user->membership_status = 'active';
         $user->save();
 
         // Update transaction status
         $transaction->status = 'approved';
         $transaction->save();
+
+        // Send approval email
+        Mail::to($user->email)->send(new PaymentApproved($transaction));
 
         session()->flash('message', 'Payment approved and membership activated.');
     }
@@ -36,6 +43,14 @@ class ManagePayments extends Component
         $transaction = PaymentTransaction::findOrFail($transactionId);
         $transaction->status = 'rejected';
         $transaction->save();
+
+        // Update user status
+        $user = $transaction->user;
+        $user->membership_status = 'inactive';
+        $user->save();
+
+        // Send rejection email
+        Mail::to($transaction->user->email)->send(new PaymentRejected($transaction));
 
         session()->flash('message', 'Payment rejected.');
     }

@@ -26,7 +26,7 @@
                             class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                     </span>
-                    <span class="text-xs font-black uppercase tracking-[0.3em] text-white/80">AlphaMode v2.0 is
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-white/80">AlphaMode v2.0 is
                         Live</span>
                 </div>
 
@@ -48,8 +48,7 @@
                         class="group/btn relative inline-flex items-center justify-center px-10 h-16 rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 transition-all active:scale-95">
                         <div class="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent"></div>
                         <div class="relative flex items-center gap-3">
-                            <span
-                                class="font-display font-black uppercase tracking-[0.2em] text-sm text-primary-content">
+                            <span class="font-display font-bold uppercase tracking-wider text-sm text-primary-content">
                                 Begin Transformation
                             </span>
                             <svg class="w-5 h-5 text-primary-content group-hover/btn:translate-x-1 transition-transform"
@@ -63,7 +62,7 @@
                     <a href="{{ route('plans') }}"
                         class="group/btn relative inline-flex items-center justify-center px-10 h-16 rounded-2xl overflow-hidden border border-base-content/10 dark:border-white/10 backdrop-blur-sm bg-base-content/5 dark:bg-white/5 hover:bg-base-content/10 dark:hover:bg-white/10 transition-all active:scale-95">
                         <span
-                            class="font-display font-black uppercase tracking-[0.2em] text-sm text-base-content dark:text-white">
+                            class="font-display font-bold uppercase tracking-wider text-sm text-base-content dark:text-white">
                             Explore Tiers
                         </span>
                     </a>
@@ -83,9 +82,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-base-content dark:text-white font-black text-xl">1.2k+</p>
+                        <p class="text-base-content dark:text-white font-bold text-xl">1.2k+</p>
                         <p
-                            class="text-base-content/40 dark:text-white/40 text-[10px] font-bold uppercase tracking-widest">
+                            class="text-base-content/40 dark:text-white/40 text-[10px] font-bold uppercase tracking-wider">
                             Active Members</p>
                     </div>
                 </div>
@@ -154,9 +153,10 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-20">
                     <h2
-                        class="text-5xl font-display font-black mb-6 uppercase tracking-tight italic bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        class="text-5xl font-display font-black mb-6 tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                         Popular Tiers</h2>
-                    <p class="text-base-content/40 font-black uppercase tracking-[0.3em] text-sm">Engineered for every level
+                    <p class="text-base-content/40 font-bold uppercase tracking-widest text-[11px]">Engineered for every
+                        level
                         of intensity</p>
                 </div>
 
@@ -184,7 +184,7 @@
 
                                 <div class="mt-auto pt-8 border-t border-base-content/5">
                                     <a href="{{ route('plans') }}"
-                                        class="btn btn-outline btn-block rounded-2xl border-2 border-base-content/10 font-display font-black uppercase tracking-[0.2em] h-14 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-content transition-all">
+                                        class="btn btn-outline btn-block rounded-2xl border-2 border-base-content/10 font-display font-bold uppercase tracking-wider h-14 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-content transition-all">
                                         Select Tier
                                     </a>
                                 </div>
@@ -201,12 +201,12 @@
         <div class="max-w-7xl mx-auto px-6 py-32">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 px-4 md:px-0">
                 <div>
-                    <h2 class="text-5xl font-display font-black mb-6 uppercase tracking-tight italic">Elite Squad</h2>
-                    <p class="text-base-content/40 font-black uppercase tracking-[0.3em] text-sm">Work with the absolute
+                    <h2 class="text-5xl font-display font-black mb-6 tracking-tight">Elite Squad</h2>
+                    <p class="text-base-content/40 font-bold uppercase tracking-widest text-[11px]">Work with the absolute
                         best in the field</p>
                 </div>
                 <a href="{{ route('trainers') }}"
-                    class="link text-primary font-black uppercase tracking-[0.2em] text-xs pb-2 hover:opacity-80 transition-opacity">
+                    class="link text-primary font-bold uppercase tracking-wider text-[10px] pb-2 hover:opacity-80 transition-opacity">
                     View Full Roster
                 </a>
             </div>
@@ -241,7 +241,7 @@
                                 class="text-2xl font-display font-black text-base-content mb-2 tracking-tight group-hover:text-primary transition-colors">
                                 {{ $trainer->user->name }}
                             </h3>
-                            <p class="text-primary text-xs font-black uppercase tracking-[0.3em] mb-4">
+                            <p class="text-primary text-[10px] font-bold uppercase tracking-wider mb-4">
                                 {{ $trainer->specialties }}
                             </p>
 
@@ -250,7 +250,7 @@
                             </p>
 
                             <a href="{{ route('trainers') }}"
-                                class="btn btn-ghost btn-sm text-primary font-black uppercase tracking-widest hover:bg-primary/10 rounded-xl">
+                                class="btn btn-ghost btn-sm text-primary font-bold uppercase tracking-wider rounded-xl text-xs">
                                 Request Session
                             </a>
                         </div>
@@ -283,7 +283,7 @@
                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
                                     </svg>
                                 </span>
-                                <p class="text-white font-black uppercase tracking-[0.2em] text-xs">New Content Daily
+                                <p class="text-white font-bold uppercase tracking-wider text-[11px]">New Content Daily
                                 </p>
                             </div>
                         </div>
@@ -292,7 +292,7 @@
 
                 <div class="lg:w-1/2">
                     <h2
-                        class="text-5xl font-display font-black text-base-content dark:text-white mb-8 tracking-tighter uppercase italic leading-none">
+                        class="text-5xl font-display font-black text-base-content dark:text-white mb-8 tracking-tighter italic leading-none">
                         MASTER YOUR <span
                             class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">TECHNIQUE</span>
                     </h2>
@@ -301,15 +301,18 @@
                         motivational shorts, the Hub is your 24/7 digital trainer.
                     </p>
                     <ul class="space-y-4 mb-12">
-                        <li class="flex items-center gap-4 text-white/80 font-black uppercase tracking-widest text-xs">
+                        <li
+                            class="flex items-center gap-4 text-white/80 font-bold uppercase tracking-wider text-[11px]">
                             <div class="w-2 h-2 rounded-full bg-primary"></div>
                             4K Form Breakdowns
                         </li>
-                        <li class="flex items-center gap-4 text-white/80 font-black uppercase tracking-widest text-xs">
+                        <li
+                            class="flex items-center gap-4 text-white/80 font-bold uppercase tracking-wider text-[11px]">
                             <div class="w-2 h-2 rounded-full bg-secondary"></div>
                             Nutrition Essentials
                         </li>
-                        <li class="flex items-center gap-4 text-white/80 font-black uppercase tracking-widest text-xs">
+                        <li
+                            class="flex items-center gap-4 text-white/80 font-bold uppercase tracking-wider text-[11px]">
                             <div class="w-2 h-2 rounded-full bg-accent"></div>
                             Elite Mindset Training
                         </li>
@@ -317,7 +320,7 @@
                     <a href="{{ route('coaching.hub') }}"
                         class="group relative inline-flex items-center justify-center h-16 px-10 rounded-2xl overflow-hidden shadow-xl active:scale-95 transition-all">
                         <div class="absolute inset-0 bg-white hover:bg-white/90 transition-colors"></div>
-                        <span class="relative font-display font-black uppercase tracking-[0.2em] text-sm text-black">
+                        <span class="relative font-display font-bold uppercase tracking-wider text-sm text-black">
                             Enter The Hub
                         </span>
                     </a>
@@ -340,17 +343,17 @@
             <div class="relative z-10 text-center max-w-3xl mx-auto">
                 <h2
                     class="text-4xl md:text-6xl font-display font-black text-base-content dark:text-white mb-8 tracking-tighter italic text-center">
-                    STOP WATCHING. <br>
+                    Stop watching. <br>
                     <span
-                        class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">START
-                        BECOMING.</span>
+                        class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Start
+                        becoming.</span>
                 </h2>
                 <p class="text-lg md:text-xl text-base-content/50 dark:text-white/50 mb-12 font-medium leading-relaxed">
                     The difference between who you are and who you want to be is what you do.
                     Join the AlphaMode community and unlock your full biological potential today.
                 </p>
                 <a href="{{ route('register') }}"
-                    class="btn btn-primary h-16 px-12 rounded-2xl font-display font-black tracking-[0.2em] text-sm uppercase shadow-2xl shadow-primary/40 hover:scale-105 transition-transform">
+                    class="btn btn-primary h-16 px-12 rounded-2xl font-display font-bold tracking-wider text-sm uppercase shadow-2xl shadow-primary/40 hover:scale-105 transition-transform">
                     Initialize Access
                 </a>
             </div>

@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactSubmission;
 
 #[Title('Contact Us')]
 class Contact extends Component
@@ -25,8 +27,13 @@ class Contact extends Component
     {
         $this->validate();
 
-        // In a real app, you'd send an email here.
-        // For now, we'll just show a success message.
+        // Send email to admin
+        Mail::to(config('mail.from.address'))->send(new ContactSubmission([
+            'name' => $this->name,
+            'email' => $this->email,
+            'message' => $this->message,
+        ]));
+
         session()->flash('success', 'Thank you for reaching out! We will get back to you soon.');
 
         $this->reset(['name', 'email', 'message']);

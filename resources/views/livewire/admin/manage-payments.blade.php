@@ -46,12 +46,12 @@
                 <table class="table table-lg w-full">
                     <thead>
                         <tr class="bg-base-200/50 text-base-content/70">
-                            <th class="font-black uppercase tracking-widest text-[10px]">Member</th>
-                            <th class="font-black uppercase tracking-widest text-[10px]">Plan</th>
-                            <th class="font-black uppercase tracking-widest text-[10px]">Amount</th>
-                            <th class="font-black uppercase tracking-widest text-[10px]">Receipt</th>
-                            <th class="font-black uppercase tracking-widest text-[10px]">Date</th>
-                            <th class="font-black uppercase tracking-widest text-[10px]">Actions</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Member</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Plan</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Amount</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Receipt</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Date</th>
+                            <th class="font-bold uppercase tracking-wider text-[11px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-base-content/5">
@@ -108,7 +108,7 @@
                                         </div>
                                     @else
                                         <span
-                                            class="badge {{ $transaction->status === 'approved' ? 'badge-success' : 'badge-error' }} badge-md font-bold uppercase tracking-widest text-[10px]">
+                                            class="badge {{ $transaction->status === 'approved' ? 'badge-success' : 'badge-error' }} badge-md font-bold uppercase tracking-wider text-[10px]">
                                             {{ $transaction->status }}
                                         </span>
                                     @endif

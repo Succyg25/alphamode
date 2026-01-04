@@ -10,15 +10,15 @@
     <div class="text-center mb-16 relative">
         <div
             class="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-primary uppercase bg-primary/10 rounded-full">
-            Member Sanctuary
+            Member Settings
         </div>
         <h1
             class="text-5xl font-display font-black mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent italic">
-            Refine Your Identity
+            Update Profile
         </h1>
         <p class="text-xl text-base-content/60 max-w-2xl mx-auto leading-relaxed">
-            Personalize your presence in the AlphaMode ecosystem. Your profile
-            is the manifest of your transformation.
+            Personalize your experience in the AlphaMode community. Your profile
+            updates reflect your progress.
         </p>
     </div>
 
@@ -75,7 +75,7 @@
                                     <input type="file" wire:model="photo" class="hidden" accept="image/*" />
                                 </label>
                             </div>
-                            <p class="text-xs font-black uppercase tracking-widest text-base-content/40 text-center">
+                            <p class="text-xs font-bold uppercase tracking-wider text-base-content/40 text-center">
                                 PNG, JPG or WEBP <br> Max 1MB
                             </p>
                             @error('photo')
@@ -91,7 +91,7 @@
                                 <div class="form-control w-full">
                                     <label class="label mb-2">
                                         <span
-                                            class="label-text text-xs font-black uppercase tracking-widest text-base-content/40">Full
+                                            class="label-text text-xs font-bold uppercase tracking-wider text-base-content/40">Full
                                             Name</span>
                                     </label>
                                     <input type="text" wire:model="name"
@@ -106,7 +106,7 @@
                                 <div class="form-control w-full">
                                     <label class="label mb-2">
                                         <span
-                                            class="label-text text-xs font-black uppercase tracking-widest text-base-content/40">Username</span>
+                                            class="label-text text-xs font-bold uppercase tracking-wider text-base-content/40">Username</span>
                                     </label>
                                     <div class="relative">
                                         <span
@@ -125,8 +125,8 @@
                             <div class="form-control w-full">
                                 <label class="label mb-2">
                                     <span
-                                        class="label-text text-xs font-black uppercase tracking-widest text-base-content/40">Secure
-                                        Email</span>
+                                        class="label-text text-xs font-bold uppercase tracking-wider text-base-content/40">Email
+                                        Address</span>
                                 </label>
                                 <input type="email" wire:model="email"
                                     class="input bg-base-content/5 border-none focus:ring-2 focus:ring-primary h-14 rounded-2xl font-bold @error('email') ring-2 ring-error @enderror" />
@@ -139,8 +139,8 @@
                             <div class="pt-6 border-t border-base-content/5 flex items-center justify-between gap-6">
                                 <div class="hidden sm:block">
                                     <p
-                                        class="text-[10px] font-black uppercase tracking-widest text-base-content/30 italic">
-                                        AlphaMode Security: Personal data is <br> encrypted at biological grade.
+                                        class="text-[10px] font-bold uppercase tracking-wider text-base-content/30 italic">
+                                        AlphaMode Security: Personal data is <br> encrypted for your protection.
                                     </p>
                                 </div>
                                 <button type="submit"
@@ -148,7 +148,7 @@
                                     <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary"></div>
                                     <div class="relative flex items-center gap-3">
                                         <span
-                                            class="font-display font-black uppercase tracking-[0.2em] text-sm text-primary-content">
+                                            class="font-display font-bold uppercase tracking-wider text-sm text-primary-content">
                                             Save Changes
                                         </span>
                                         <svg wire:loading.remove wire:target="updateProfile"

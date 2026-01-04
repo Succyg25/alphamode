@@ -71,6 +71,7 @@ class ManageMembers extends Component
                 'email' => $this->email,
                 'password' => Hash::make($this->password),
                 'role' => 'member',
+                'membership_status' => 'active',
             ]);
             session()->flash('message', 'Member Created Successfully.');
         }

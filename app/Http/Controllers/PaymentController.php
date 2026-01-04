@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PaymentReceived;
 
 class PaymentController extends Controller
 {
@@ -52,13 +54,20 @@ class PaymentController extends Controller
         if ($request->hasFile('receipt')) {
             $path = $request->file('receipt')->store('receipts', 'public');
 
-            \App\Models\PaymentTransaction::create([
+            $transaction = \App\Models\PaymentTransaction::create([
                 'user_id' => $user->id,
                 'plan_id' => $plan->id,
                 'amount' => $plan->price,
                 'receipt_path' => $path,
                 'status' => 'pending',
             ]);
+
+            // Set user status to pending
+            $user->membership_status = 'pending';
+            $user->save();
+
+            // Send confirmation email
+            Mail::to($user->email)->send(new PaymentReceived($transaction));
         }
 
         return redirect()->route('dashboard')->with('message', 'Receipt uploaded successfully! Your plan will be activated once verified by our team.');
