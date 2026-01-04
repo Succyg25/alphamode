@@ -1,57 +1,213 @@
-<div class="flex flex-col gap-10">
-    <div class="flex flex-col gap-2">
-        <h2 class="text-2xl font-bold text-primary">Create Account</h2>
+<div class="min-h-[80vh] flex items-center justify-center relative overflow-hidden py-20">
+    <!-- Cosmic Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div
+            class="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[120px] animate-pulse">
+        </div>
+        <div class="absolute bottom-1/4 -left-20 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse"
+            style="animation-delay: 2.5s;"></div>
 
-        <form wire:submit.prevent="registerUser" class="space-y-4">
-            {{-- Flash Message --}}
-            @if (session()->has('feedback'))
-                <div role="alert" class="alert alert-primary alert-soft">
-                    <span>{{ session('feedback') }}</span>
-                </div>
-            @endif
+        <!-- Large Decorative Text -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] font-display font-black text-base-content/[0.02] uppercase tracking-[0.2em] select-none whitespace-nowrap italic rotate-12">
+            Induction
+        </div>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Username</legend>
-                    <input type="text" wire:model.live="username" class="input input-lg rounded-2xl w-full"
-                        placeholder="Type here" />
-                    @error('username')<p class="label text-primary">{{ $message }}</p>@enderror
-                </fieldset>
-
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Email Address</legend>
-                    <input type="email" wire:model.live="email" class="input input-lg rounded-2xl w-full"
-                        placeholder="Type here" />
-                    @error('email')<p class="label text-primary">{{ $message }}</p>@enderror
-                </fieldset>
-
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Password</legend>
-                    <div class="relative w-full" x-data="{ show: false }">
-                        <input :type="show ? 'text' : 'password'" wire:model.live="password"
-                            class="input input-lg rounded-2xl w-full pr-10" placeholder="Type here" />
-                        <button type="button" @click="show = !show"
-                            class="absolute inset-y-0 right-0 pr-5 flex items-center text-sm leading-5">
-                            <svg x-show="!show" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                            <svg x-show="show" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" style="display: none;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.05 10.05 0 011.574-2.59M5.378 5.378A10.05 10.05 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.05 10.05 0 01-1.574 2.59M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />
-                            </svg>
-                        </button>
-                    </div>
-                    @error('password')<p class="label text-primary">{{ $message }}</p>@enderror
-                </fieldset>
+    <div class="w-full max-w-2xl px-6 relative">
+        <!-- Auth Card -->
+        <div class="relative group">
+            <div
+                class="absolute -inset-1 bg-gradient-to-br from-accent/20 via-primary/20 to-secondary/20 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700">
             </div>
 
-            <button class="btn btn-primary">Initialize Registration</button>
-        </form>
+            <div
+                class="relative bg-base-100/40 backdrop-blur-3xl p-10 md:p-14 rounded-[3rem] border border-base-content/5 shadow-2xl overflow-hidden">
+                <!-- Branding Header -->
+                <div class="text-center mb-12">
+                    <div
+                        class="inline-block px-4 py-1.5 mb-6 text-[10px] font-black tracking-[0.4em] text-accent uppercase bg-accent/10 rounded-full italic">
+                        New Member Protocol
+                    </div>
+                    <h2
+                        class="text-5xl font-display font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent italic uppercase tracking-tighter mb-4">
+                        Register
+                    </h2>
+                    <p class="text-xs font-black uppercase tracking-[0.2em] text-base-content/40 leading-relaxed">
+                        Initialize your presence within the <br> AlphaMode ecosystem
+                    </p>
+                </div>
+
+                <form wire:submit.prevent="registerUser" class="space-y-8">
+                    {{-- Flash Message --}}
+                    @if (session()->has('feedback'))
+                        <div role="alert"
+                            class="alert alert-success bg-success/10 border border-success/20 text-success rounded-2xl p-6 backdrop-blur-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="font-bold uppercase tracking-widest text-xs">{{ session('feedback') }}</span>
+                        </div>
+                    @endif
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Full Name -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-accent transition-colors italic">Full
+                                    Operational Name</span>
+                            </label>
+                            <input type="text" wire:model.live="name"
+                                class="input bg-base-content/5 border-none focus:ring-2 focus:ring-accent h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                                placeholder="Full Name" />
+                            @error('name')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">
+                            {{ $message }}</p>@enderror
+                        </div>
+
+                        <!-- Username -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-accent transition-colors italic">Codename
+                                    (Username)</span>
+                            </label>
+                            <input type="text" wire:model.live="username"
+                                class="input bg-base-content/5 border-none focus:ring-2 focus:ring-accent h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                                placeholder="Username" />
+                            @error('username')<p
+                                class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}
+                            </p>@enderror
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-primary transition-colors italic">Comm-Link
+                                    Address (Email)</span>
+                            </label>
+                            <input type="email" wire:model.live="email"
+                                class="input bg-base-content/5 border-none focus:ring-2 focus:ring-primary h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                                placeholder="Email" />
+                            @error('email')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">
+                            {{ $message }}</p>@enderror
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-primary transition-colors italic">Signal
+                                    Frequency (Phone)</span>
+                            </label>
+                            <input type="text" wire:model.live="phone"
+                                class="input bg-base-content/5 border-none focus:ring-2 focus:ring-primary h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                                placeholder="Phone Number" />
+                            @error('phone')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">
+                            {{ $message }}</p>@enderror
+                        </div>
+
+                        <!-- Birth Date -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-secondary transition-colors italic">Activation
+                                    Date (Birth Date)</span>
+                            </label>
+                            <input type="date" wire:model.live="birth_date"
+                                class="input bg-base-content/5 border-none focus:ring-2 focus:ring-secondary h-16 rounded-2xl font-bold w-full pl-6 group-focus-within/field:bg-base-content/10 transition-all text-lg" />
+                            @error('birth_date')<p
+                                class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}
+                            </p>@enderror
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span
+                                    class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-secondary transition-colors italic">Access
+                                    Key (Password)</span>
+                            </label>
+                            <div class="relative" x-data="{ show: false }">
+                                <input :type="show ? 'text' : 'password'" wire:model.live="password"
+                                    class="input bg-base-content/5 border-none focus:ring-2 focus:ring-secondary h-16 rounded-2xl font-bold w-full pl-6 pr-14 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                                    placeholder="Password" />
+                                <button type="button" @click="show = !show"
+                                    class="absolute inset-y-0 right-4 flex items-center text-base-content/30 hover:text-secondary transition-colors p-2">
+                                    <svg x-show="!show" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                    <svg x-show="show" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" style="display: none;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.05 10.05 0 011.574-2.59M5.378 5.378A10.05 10.05 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.05 10.05 0 01-1.574 2.59M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3l18 18" />
+                                    </svg>
+                                </button>
+                            </div>
+                            @error('password')<p
+                                class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}
+                            </p>@enderror
+                        </div>
+                    </div>
+
+                    <!-- Fitness Goals -->
+                    <div class="form-control w-full group/field">
+                        <label class="label mb-2">
+                            <span
+                                class="label-text text-[10px] font-black uppercase tracking-[0.2em] text-base-content/40 group-focus-within/field:text-accent transition-colors italic">Optimization
+                                Objectives (Fitness Goals)</span>
+                        </label>
+                        <textarea wire:model.live="fitness_goals"
+                            class="textarea bg-base-content/5 border-none focus:ring-2 focus:ring-accent min-h-[120px] rounded-2xl font-bold w-full pl-6 pt-4 group-focus-within/field:bg-base-content/10 transition-all text-lg"
+                            placeholder="What are your goals? (e.g., Muscle gain, Fat loss, Mobility...)"></textarea>
+                        @error('fitness_goals')<p
+                            class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit"
+                            class="group/btn relative w-full h-16 rounded-[2rem] overflow-hidden shadow-2xl transition-all active:scale-[0.98]">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-accent via-primary to-secondary group-hover/btn:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="relative flex items-center justify-center gap-4">
+                                <span
+                                    class="font-display font-black uppercase tracking-[0.3em] text-sm text-primary-content">Initialize
+                                    Registration</span>
+                                <svg class="w-6 h-6 text-primary-content group-hover/btn:translate-x-1 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="text-center pt-6">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/30 italic mb-4">
+                            Already synchronized?</p>
+                        <a href="{{ route('login') }}"
+                            class="text-xs font-bold text-accent hover:text-primary uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
+                            <span>Open Access Gateway</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent/40"></span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Decorative Floating Node -->
+        <div class="absolute -top-10 -left-10 w-24 h-24 bg-accent/20 rounded-3xl blur-2xl animate-bounce pointer-events-none"
+            style="animation-duration: 5s;"></div>
     </div>
 </div>

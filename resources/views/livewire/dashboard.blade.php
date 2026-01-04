@@ -1,267 +1,173 @@
-<div class="font-sans antialiased text-base-content min-h-screen">
+<div class="font-sans antialiased text-base-content min-h-screen py-8">
     <!-- Floating Background Elements (Glassmorphism effect) -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div class="absolute top-20 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse"
-            style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 left-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse"
-            style="animation-delay: 2s;"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
 
-    <!-- Main Content Header -->
-    <div class="mb-8">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-                <h1 class="text-4xl font-display font-bold text-base-content mb-2">
-                    Welcome back, <span
-                        class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{{ explode(' ', Auth::user()->name)[0] }}</span>!
-                </h1>
-                <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
-                    <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span><strong>Member Verified</strong></span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-base-content/40" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>Member since {{ Auth::user()->created_at->format('M Y') }}</span>
-                    </div>
-                </div>
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 relative px-4 md:px-0">
+        <div class="space-y-2">
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-black uppercase tracking-widest rounded-full border border-primary/20">
+                    Official Member
+                </span>
+                <span class="text-xs font-bold text-base-content/40 tracking-wider">Session ID: #{{ substr(Auth::id(), 0, 8) }}</span>
             </div>
+            <h1 class="text-4xl md:text-5xl font-display font-black tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                Welcome back, {{ explode(' ', Auth::user()->name)[0] }}
+            </h1>
+            <p class="text-base-content/60 font-medium text-lg">Your next peak performance starts now.</p>
+        </div>
 
-            @if(!$upcomingClasses->isEmpty())
+        @if(!$upcomingClasses->isEmpty())
+            <div class="p-6 bg-base-100/50 backdrop-blur-xl rounded-3xl border border-base-content/5 shadow-2xl transition-all hover:scale-105 duration-300">
                 <div class="text-right hidden md:block">
                     <p class="text-xs text-base-content/50 uppercase tracking-widest font-bold">Next Session In</p>
                     <p class="text-xl font-display font-bold text-primary">
                         {{ $upcomingClasses->first()->schedule->start_time->diffForHumans() }}</p>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 
-    <!-- Stats Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <!-- Membership Status Card -->
-        <div class="relative group">
-            <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-10 group-hover:opacity-20 transition">
-            </div>
-            <div class="relative bg-base-100 p-6 rounded-2xl border border-base-content/5 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-base-content/60 font-medium font-display">Membership Status</p>
-                        @if(Auth::user()->currentPlan)
-                            <p class="text-2xl font-bold text-base-content mt-1">{{ Auth::user()->currentPlan->name }}</p>
-                            <span class="badge badge-success badge-sm mt-2">Active</span>
-                        @else
-                            <p class="text-2xl font-bold text-base-content mt-1">No Plan</p>
-                            <span class="badge badge-ghost badge-sm mt-2">Inactive</span>
-                        @endif
-                    </div>
-                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
+    <!-- Stats Dashboard -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 px-4 md:px-0">
+        <!-- Membership Card -->
+        <div class="group relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition duration-500"></div>
+            <div class="relative flex flex-col items-center justify-center p-8 bg-base-100/80 backdrop-blur-xl rounded-[2rem] border border-base-content/5 shadow-xl">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                    </svg>
                 </div>
+                <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-1">Membership Status</p>
+                <p class="text-2xl font-display font-black {{ Auth::user()->currentPlan ? 'text-success' : 'text-error' }}">
+                    {{ Auth::user()->currentPlan ? 'ACTIVE' : 'INACTIVE' }}
+                </p>
             </div>
         </div>
 
-        <!-- Upcoming Sessions Card -->
-        <div class="relative group">
-            <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-secondary to-accent rounded-2xl blur opacity-10 group-hover:opacity-20 transition">
-            </div>
-            <div class="relative bg-base-100 p-6 rounded-2xl border border-base-content/5 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-base-content/60 font-medium font-display">Upcoming Classes</p>
-                        <p class="text-3xl font-bold text-base-content mt-1">{{ $upcomingClasses->count() }}</p>
-                        <p class="text-xs text-secondary font-semibold mt-1">Booked sessions</p>
-                    </div>
-                    <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
-                        </svg>
-                    </div>
+        <!-- Upcoming Classes Card -->
+        <div class="group relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-secondary to-accent rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-500"></div>
+            <div class="relative flex flex-col items-center justify-center p-8 bg-base-100/80 backdrop-blur-xl rounded-[2rem] border border-base-content/5 shadow-xl">
+                <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                 </div>
+                <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-1">Upcoming Classes</p>
+                <p class="text-2xl font-display font-black text-base-content">
+                    {{ $upcomingClasses->count() }} SESSION{{ $upcomingClasses->count() !== 1 ? 'S' : '' }}
+                </p>
             </div>
         </div>
 
-        <!-- Workout History Card -->
-        <div class="relative group">
-            <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-accent to-primary rounded-2xl blur opacity-10 group-hover:opacity-20 transition">
-            </div>
-            <div class="relative bg-base-100 p-6 rounded-2xl border border-base-content/5 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-base-content/60 font-medium font-display">Total Workouts</p>
-                        <p class="text-3xl font-bold text-base-content mt-1">{{ $recentActivity->count() }}</p>
-                        <p class="text-xs text-accent font-semibold mt-1">Lifetime activity</p>
-                    </div>
-                    <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
+        <!-- Total Workouts Card -->
+        <div class="group relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-500"></div>
+            <div class="relative flex flex-col items-center justify-center p-8 bg-base-100/80 backdrop-blur-xl rounded-[2.5rem] border border-base-content/5 shadow-xl">
+                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                 </div>
+                <p class="text-xs font-black uppercase tracking-widest text-base-content/40 mb-1">Total Workouts</p>
+                <p class="text-2xl font-display font-black text-base-content">
+                    {{ $recentActivity->count() }} COMPLETED
+                </p>
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Main Column (2/3) -->
-        <div class="lg:col-span-2 space-y-8">
-
-            <!-- Featured Action Card (Quick Booking) -->
+    <!-- Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative px-4 md:px-0">
+        <!-- Main Panel (Left 8 Columns) -->
+        <div class="lg:col-span-8 space-y-8">
+            <!-- Featured Action Card -->
             @if($upcomingClasses->isEmpty())
-                <div class="relative group">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl blur-xl opacity-20">
-                    </div>
-                    <div
-                        class="relative bg-base-100/80 backdrop-blur-xl p-8 rounded-3xl border border-base-content/5 text-center overflow-hidden">
-                        <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl">
+                <div class="relative group p-10 rounded-[3rem] bg-gradient-to-br from-primary to-secondary overflow-hidden shadow-2xl">
+                    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white/10 rounded-full blur-3xl transition-transform duration-700 group-hover:scale-110"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="max-w-md text-center md:text-left">
+                            <h2 class="text-4xl font-display font-black text-primary-content mb-4 tracking-tight">Ready to train?</h2>
+                            <p class="text-primary-content opacity-80 text-lg">Your next milestone is just one booking away. Explore our classes and start your transformation.</p>
                         </div>
-                        <div class="relative max-w-lg mx-auto">
-                            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4" />
-                                </svg>
-                            </div>
-                            <h2 class="text-3xl font-display font-bold text-base-content mb-4">Ready to train?</h2>
-                            <p class="text-lg text-base-content/70 mb-8">
-                                You haven't booked any sessions yet. Check out our expert trainers and start your fitness
-                                journey today!
-                            </p>
-                            <a href="{{ route('trainers') }}"
-                                class="btn btn-primary btn-lg rounded-xl shadow-lg shadow-primary/25 transform hover:-translate-y-1 transition-all">
-                                Explore Trainers
-                            </a>
-                        </div>
+                        <a href="{{ route('trainers') }}" class="btn btn-white bg-white text-primary border-none rounded-2xl px-10 font-black uppercase tracking-widest hover:bg-white/90 transform hover:-translate-y-1 transition-all">
+                            Explore Trainers
+                        </a>
                     </div>
                 </div>
             @else
-                <!-- Highlighted Next Class -->
+                <!-- Highlight Next Class -->
                 @php $nextClass = $upcomingClasses->first(); @endphp
-                <div class="relative group">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-3xl blur-xl opacity-20">
-                    </div>
-                    <div
-                        class="relative bg-base-100 p-8 rounded-3xl border border-base-content/5 shadow-xl overflow-hidden">
-                        <div class="flex flex-col md:flex-row gap-8 items-center">
-                            <div
-                                class="w-32 h-32 rounded-2xl bg-primary/10 flex flex-col items-center justify-center text-primary border border-primary/20 flex-shrink-0">
-                                <span
-                                    class="text-sm font-bold uppercase">{{ $nextClass->schedule->start_time->format('M') }}</span>
-                                <span
-                                    class="text-5xl font-display font-black leading-none">{{ $nextClass->schedule->start_time->format('d') }}</span>
+                <div class="relative group p-10 rounded-[3rem] bg-base-100 shadow-2xl border border-base-content/5 overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+                    <div class="relative z-10 flex items-center justify-between gap-6 flex-wrap">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-primary text-primary-content flex items-center justify-center font-display font-black text-xl shadow-lg shadow-primary/20">
+                                {{ $nextClass->schedule->start_time->format('d') }}
                             </div>
-                            <div class="flex-1 text-center md:text-left">
-                                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
-                                    <span class="badge badge-primary badge-outline badge-sm">Next Session</span>
-                                    <span
-                                        class="text-xs font-bold text-base-content/40 uppercase tracking-widest">{{ $nextClass->schedule->start_time->format('H:i') }}
-                                        - {{ $nextClass->schedule->end_time->format('H:i') }}</span>
-                                </div>
-                                <h2 class="text-3xl font-display font-bold text-base-content mb-1">
-                                    {{ $nextClass->schedule->workoutClass->name }}
-                                </h2>
-                                <p
-                                    class="text-base-content/60 text-lg mb-4 flex items-center justify-center md:justify-start gap-2">
-                                    <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    With {{ $nextClass->schedule->workoutClass->trainer->user->name }}
-                                </p>
-                                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-                                    <button class="btn btn-primary btn-md rounded-xl">View Details</button>
-                                    <button class="btn btn-ghost btn-md rounded-xl">Reschedule</button>
-                                </div>
+                            <div>
+                                <h3 class="text-2xl font-display font-black text-base-content">{{ $nextClass->schedule->workoutClass->name }}</h3>
+                                <p class="text-base-content/60 font-medium">with {{ $nextClass->schedule->workoutClass->trainer->user->name }} • {{ $nextClass->schedule->start_time->format('H:i') }}</p>
                             </div>
                         </div>
+                        <span class="px-6 py-2 bg-primary/10 text-primary font-black text-xs uppercase tracking-widest rounded-full">
+                            Next Session
+                        </span>
                     </div>
                 </div>
             @endif
 
-            <!-- Workout History Table -->
-            <div class="relative group">
-                <div
-                    class="absolute -inset-0.5 bg-gradient-to-r from-base-content/5 to-base-content/10 rounded-3xl blur opacity-20">
-                </div>
-                <div class="relative bg-base-100 p-8 rounded-3xl border border-base-content/5 shadow-lg">
+            <!-- Workout History -->
+            <div class="card bg-base-100/50 backdrop-blur-xl shadow-2xl border border-base-content/5 rounded-[2.5rem]">
+                <div class="card-body p-8 md:p-10">
                     <div class="flex items-center justify-between mb-8">
-                        <h2 class="text-2xl font-display font-bold text-base-content">Workout History</h2>
-                        <a href="#" class="link link-primary text-sm font-bold no-underline hover:underline">See All</a>
+                        <div>
+                            <h2 class="card-title text-2xl font-display font-black">Workout History</h2>
+                            <p class="text-sm text-base-content/50 font-medium">Your recent performance records</p>
+                        </div>
+                        <button class="btn btn-ghost btn-sm text-primary font-black uppercase tracking-widest">View All</button>
                     </div>
 
                     @if($recentActivity->isEmpty())
-                        <div
-                            class="text-center py-12 bg-base-200/50 rounded-2xl border border-dashed border-base-content/10">
-                            <p class="text-base-content/50">No workout records found yet.</p>
+                        <div class="bg-base-content/5 border border-dashed border-base-content/20 rounded-3xl p-12 text-center">
+                            <p class="text-base-content/60 font-bold uppercase tracking-widest text-sm">No activity recorded yet.</p>
                         </div>
                     @else
-                        <div class="overflow-x-auto">
-                            <table class="table w-full border-separate border-spacing-y-3">
+                        <div class="overflow-x-auto -mx-8 md:mx-0">
+                            <table class="table w-full">
                                 <thead>
-                                    <tr class="text-base-content/40 uppercase text-xs tracking-widest border-none">
-                                        <th class="bg-transparent pl-4 border-none">Workout</th>
-                                        <th class="bg-transparent border-none">Trainer</th>
-                                        <th class="bg-transparent border-none">Date & Time</th>
-                                        <th class="bg-transparent text-right pr-4 border-none">Action</th>
+                                    <tr class="border-b border-base-content/5">
+                                        <th class="bg-transparent text-xs font-black uppercase tracking-widest text-base-content/40 py-6 px-8">Activity</th>
+                                        <th class="bg-transparent text-xs font-black uppercase tracking-widest text-base-content/40 py-6 px-8">Trainer</th>
+                                        <th class="bg-transparent text-xs font-black uppercase tracking-widest text-base-content/40 py-6 px-8">Date</th>
+                                        <th class="bg-transparent"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($recentActivity->take(5) as $activity)
-                                        <tr class="bg-base-200/30 hover:bg-base-200/60 transition-colors group/row border-none">
-                                            <td class="rounded-l-2xl pl-4 border-none">
-                                                <div class="flex items-center gap-3">
-                                                    <div
-                                                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover/row:bg-primary group-hover/row:text-primary-content transition-all">
-                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                            viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                                        </svg>
+                                    @foreach($recentActivity as $activity)
+                                        <tr class="group/row hover:bg-base-content/5 transition-colors">
+                                            <td class="bg-transparent border-none py-6 px-8">
+                                                <div class="flex items-center gap-4">
+                                                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                                        {{ substr($activity->schedule->workoutClass->name, 0, 1) }}
                                                     </div>
-                                                    <span
-                                                        class="font-bold text-base-content">{{ $activity->schedule->workoutClass->name }}</span>
+                                                    <span class="font-bold text-base-content">{{ $activity->schedule->workoutClass->name }}</span>
                                                 </div>
                                             </td>
-                                            <td class="border-none">
-                                                <span
-                                                    class="font-medium text-base-content/70">{{ $activity->schedule->workoutClass->trainer->user->name }}</span>
+                                            <td class="bg-transparent border-none py-6 px-8 text-base-content/70 font-medium">
+                                                {{ $activity->schedule->workoutClass->trainer->user->name }}
                                             </td>
-                                            <td class="border-none whitespace-nowrap">
-                                                <div class="flex flex-col">
-                                                    <span
-                                                        class="text-sm font-bold text-base-content">{{ $activity->schedule->start_time->format('M d, Y') }}</span>
-                                                    <span
-                                                        class="text-xs text-base-content/40">{{ $activity->schedule->start_time->format('H:i') }}</span>
-                                                </div>
+                                            <td class="bg-transparent border-none py-6 px-8 text-base-content/50 font-medium">
+                                                {{ $activity->schedule->start_time->format('M d, Y') }}
                                             </td>
-                                            <td class="rounded-r-2xl text-right pr-4 border-none">
-                                                <button
-                                                    class="btn btn-ghost btn-sm btn-square rounded-lg group-hover/row:bg-primary/20 group-hover/row:text-primary transition-all">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M9 5l7 7-7 7" />
-                                                    </svg>
+                                            <td class="bg-transparent border-none py-6 px-8 text-right">
+                                                <button class="btn btn-ghost btn-circle btn-sm opacity-0 group-hover/row:opacity-100 transition-opacity">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                                 </button>
                                             </td>
                                         </tr>
@@ -274,106 +180,82 @@
             </div>
         </div>
 
-        <!-- Sidebar Column (1/3) -->
-        <div class="space-y-6">
-
-            <!-- Plan Details Card -->
+        <!-- Sidebar (Right 4 Columns) -->
+        <div class="lg:col-span-4 space-y-8">
+            <!-- Plan Details -->
             <div class="relative group">
-                <div
-                    class="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-10 transition">
-                </div>
-                <div class="relative bg-base-100 p-8 rounded-3xl border border-base-content/5 shadow-lg">
-                    <h3 class="font-display font-bold text-xl text-base-content mb-6 flex items-center gap-3">
-                        <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Current Plan
-                    </h3>
-                    @if(Auth::user()->currentPlan)
-                        <div class="space-y-4">
-                            <div class="p-4 rounded-2xl bg-primary/5 border border-primary/10">
-                                <p class="text-xs text-primary font-bold uppercase tracking-wider mb-1">Your Subscription
-                                </p>
-                                <p class="text-2xl font-display font-black text-base-content">
-                                    {{ Auth::user()->currentPlan->name }}</p>
+                <div class="absolute -inset-1 bg-gradient-to-tr from-accent to-primary rounded-[2.5rem] blur opacity-30"></div>
+                <div class="relative card bg-base-100 shadow-2xl border border-base-content/5 rounded-[2.5rem] overflow-hidden">
+                    <div class="card-body p-8">
+                        <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-xl font-display font-black">Plan Details</h3>
+                            <div class="w-10 h-10 rounded-xl bg-base-content/5 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                             </div>
-                            <div class="space-y-3 text-sm pt-2">
-                                <div class="flex justify-between items-center py-2 border-b border-base-content/5">
-                                    <span class="text-base-content/60">Renewal Date</span>
-                                    <span class="font-bold text-base-content">Monthly</span>
+                        </div>
+
+                        @if(Auth::user()->currentPlan)
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="text-xs text-primary font-bold uppercase tracking-wider mb-1">Your Subscription</p>
+                                    <p class="text-2xl font-display font-black text-base-content">
+                                        {{ Auth::user()->currentPlan->name }}</p>
                                 </div>
-                                <div class="flex justify-between items-center py-2">
-                                    <span class="text-base-content/60">Status</span>
-                                    <span class="text-success font-bold">● Active</span>
+                                <div class="space-y-3 text-sm pt-2">
+                                    <div class="flex justify-between items-center py-2 border-b border-base-content/5">
+                                        <span class="text-base-content/40 font-bold uppercase tracking-widest text-[10px]">Renewal Date</span>
+                                        <span class="font-bold">Next Month</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2 border-b border-base-content/5">
+                                        <span class="text-base-content/40 font-bold uppercase tracking-widest text-[10px]">Payment Method</span>
+                                        <span class="font-bold">MasterCard ****</span>
+                                    </div>
                                 </div>
+                                <a href="{{ route('subscription') }}" class="btn btn-outline btn-block rounded-2xl border-2 border-base-content/10 font-black uppercase tracking-widest h-14 mt-4">Manage Plan</a>
                             </div>
-                            <a href="{{ route('subscription') }}"
-                                class="btn btn-outline btn-primary btn-block rounded-xl mt-4">Manage Subscription</a>
-                        </div>
-                    @else
-                        <div class="text-center py-6">
-                            <p class="text-base-content/60 mb-6 italic">No active subscription found.</p>
-                            <a href="{{ route('plans') }}" class="btn btn-primary btn-block rounded-xl">View Membership
-                                Plans</a>
-                        </div>
-                    @endif
+                        @else
+                            <div class="text-center py-6">
+                                <p class="text-base-content/40 font-bold mb-6">No active plan found.</p>
+                                <a href="{{ route('plans') }}" class="btn btn-primary btn-block rounded-2xl font-black uppercase tracking-widest h-14 shadow-lg shadow-primary/20">Upgrade Now</a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
 
-            <!-- Profile Info Card -->
-            <div class="relative group">
-                <div
-                    class="absolute -inset-0.5 bg-gradient-to-r from-secondary to-primary rounded-3xl blur opacity-10 transition">
-                </div>
-                <div class="relative bg-base-100 p-8 rounded-3xl border border-base-content/5 shadow-lg">
-                    <h3 class="font-display font-bold text-xl text-base-content mb-6">Quick Actions</h3>
-                    <div class="space-y-3">
-                        <a href="{{ route('profile') }}"
-                            class="flex items-center justify-between p-4 rounded-2xl bg-base-200/50 hover:bg-primary/5 hover:text-primary transition-all group/action border border-transparent hover:border-primary/10">
-                            <span class="font-bold">Edit Profile</span>
-                            <svg class="w-5 h-5 group-hover/action:translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
+            <!-- Quick Actions -->
+            <div class="card bg-base-100/50 backdrop-blur-xl shadow-2xl border border-base-content/5 rounded-[2.5rem]">
+                <div class="card-body p-8">
+                    <h3 class="text-xl font-display font-black mb-6">Quick Actions</h3>
+                    <div class="grid gap-3">
+                        <a href="{{ route('profile') }}" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-base-content/5 transition-all group/item">
+                            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-primary-content transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            </div>
+                            <span class="font-bold text-base-content">Edit Profile</span>
                         </a>
-                        <a href="{{ route('subscription') }}"
-                            class="flex items-center justify-between p-4 rounded-2xl bg-base-200/50 hover:bg-secondary/5 hover:text-secondary transition-all group/action border border-transparent hover:border-secondary/10">
-                            <span class="font-bold">Payment Methods</span>
-                            <svg class="w-5 h-5 group-hover/action:translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
+                        <a href="{{ route('subscription') }}" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-base-content/5 transition-all group/item">
+                            <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover/item:bg-secondary group-hover/item:text-secondary-content transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                            </div>
+                            <span class="font-bold text-base-content">Payment Methods</span>
                         </a>
-                        <a href="{{ route('dashboard') }}"
-                            class="flex items-center justify-between p-4 rounded-2xl bg-base-200/50 hover:bg-accent/5 hover:text-accent transition-all group/action border border-transparent hover:border-accent/10">
-                            <span class="font-bold">Workout History</span>
-                            <svg class="w-5 h-5 group-hover/action:translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-base-content/5 transition-all group/item">
+                            <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover/item:bg-accent group-hover/item:text-accent-content transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <span class="font-bold text-base-content">Workout History</span>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Need Help? Card -->
-            <div
-                class="bg-gradient-to-br from-primary to-secondary p-8 rounded-3xl text-primary-content shadow-xl relative overflow-hidden group">
-                <div
-                    class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
-                </div>
+            <!-- Need Help? -->
+            <div class="relative group p-8 rounded-[2.5rem] bg-gradient-to-br from-base-content/10 to-base-100 border border-base-content/5 shadow-xl overflow-hidden text-center">
                 <div class="relative z-10">
-                    <h3 class="font-display font-black text-2xl mb-2">Need Help?</h3>
-                    <p class="text-primary-content/80 text-sm mb-6">Have questions about your plan or workout schedule?
-                        Our support team is here for you.</p>
-                    <a href="{{ route('contact') }}"
-                        class="btn btn-white bg-white text-primary hover:bg-white/90 border-none rounded-xl font-bold">Contact
-                        Support</a>
+                    <h4 class="font-display font-black text-lg mb-2">Need Assistance?</h4>
+                    <p class="text-sm text-base-content/50 mb-6">Our support team is available 24/7 for our premium members.</p>
+                    <a href="{{ route('contact') }}" class="link text-primary font-black uppercase tracking-widest text-xs">Contact Support</a>
                 </div>
             </div>
         </div>

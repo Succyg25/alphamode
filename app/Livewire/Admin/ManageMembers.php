@@ -4,10 +4,12 @@ namespace App\Livewire\Admin;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Manage Members')]
 class ManageMembers extends Component
 {
     public $members, $name, $email, $password, $member_id;

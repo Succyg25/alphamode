@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/subscription', Subscription::class)->name('subscription');
     Route::get('/booking/{trainer}', \App\Livewire\Booking::class)->name('booking');
+    Route::get('/coaching', \App\Livewire\CoachingHub::class)->name('coaching.hub');
 
     Route::get('/payment/checkout/{plan}', [\App\Http\Controllers\PaymentController::class, 'show'])->name('payment.checkout');
     Route::post('/payment/process', [\App\Http\Controllers\PaymentController::class, 'process'])->name('payment.process');
@@ -57,6 +58,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/plans', \App\Livewire\Admin\ManagePlans::class)->name('admin.plans');
     Route::get('/admin/classes', \App\Livewire\Admin\ManageClasses::class)->name('admin.classes');
     Route::get('/admin/schedules', \App\Livewire\Admin\ManageSchedules::class)->name('admin.schedules');
+    Route::get('/admin/payments', \App\Livewire\Admin\ManagePayments::class)->name('admin.payments');
     Route::get('/admin/members', \App\Livewire\Admin\ManageMembers::class)->name('admin.members');
 
 });

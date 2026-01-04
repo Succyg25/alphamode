@@ -20,4 +20,14 @@ class Trainer extends Model
     {
         return $this->hasMany(WorkoutClass::class);
     }
+
+    public function trainingPrograms()
+    {
+        return $this->hasMany(TrainingProgram::class);
+    }
+
+    public function workoutRoutines()
+    {
+        return $this->hasMany(WorkoutRoutine::class);
+    }
 }

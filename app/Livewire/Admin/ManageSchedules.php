@@ -4,10 +4,12 @@ namespace App\Livewire\Admin;
 
 use App\Models\ClassSchedule;
 use App\Models\WorkoutClass;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Manage Schedules')]
 class ManageSchedules extends Component
 {
     public $schedules, $workout_class_id, $start_time, $end_time, $schedule_id;

@@ -6,11 +6,13 @@ use App\Models\Trainer;
 use App\Models\WorkoutClass;
 use App\Models\ClassSchedule;
 use App\Models\Booking;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 
 #[Layout('components.layouts.trainer')]
+#[Title('Trainer Dashboard')]
 class Dashboard extends Component
 {
     public $trainer;
@@ -38,7 +40,7 @@ class Dashboard extends Component
             ->where('start_time', '>', now())
             ->count();
 
-        $this->totalClients = Booking::whereHas('classSchedule.workoutClass', function ($query) {
+        $this->totalClients = Booking::whereHas('schedule.workoutClass', function ($query) {
             $query->where('trainer_id', $this->trainer->id);
         })
             ->distinct('user_id')

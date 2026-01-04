@@ -121,96 +121,54 @@
                 </div>
 
                 <div class="relative bg-base-100 p-8 rounded-3xl shadow-2xl border border-base-300">
-                    <form id="paymentForm" action="{{ route('payment.process') }}" method="POST" class="space-y-6">
+                    <form id="paymentForm" action="{{ route('payment.process') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
                         <input type="hidden" name="plan_id" value="{{ $planId ?? '' }}">
 
-                        <!-- Payment Method -->
-                        <div>
-                            <label class="block text-base-content font-semibold mb-3 text-sm">
-                                Payment Method
-                            </label>
-                            <label
-                                class="flex items-center p-4 border-2 border-primary bg-primary/5 rounded-xl cursor-pointer transition-all">
-                                <input type="radio" name="payment_method" value="card" checked
-                                    class="radio radio-primary">
-                                <div class="ml-3 flex items-center gap-3">
-                                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                                    </svg>
-                                    <div>
-                                        <p class="font-bold text-base-content">Debit/Credit Card</p>
-                                        <p class="text-xs text-base-content/60">Visa, Mastercard, Verve</p>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-
-                        <!-- Card Details -->
-                        <div id="cardDetailsSection" class="space-y-4">
-                            <!-- Card Number -->
-                            <div class="form-control w-full">
-                                <label class="label">
-                                    <span class="label-text font-semibold">Card Number</span>
-                                </label>
-                                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456"
-                                    maxlength="19" required
-                                    class="input input-bordered w-full font-mono text-lg focus:input-primary">
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <!-- Expiry Date -->
-                                <div class="form-control w-full">
-                                    <label class="label">
-                                        <span class="label-text font-semibold">Expiry Date</span>
-                                    </label>
-                                    <input type="text" id="card_expiry" name="card_expiry" placeholder="MM/YY"
-                                        maxlength="5" required
-                                        class="input input-bordered w-full font-mono text-lg focus:input-primary">
-                                </div>
-
-                                <!-- CVV -->
-                                <div class="form-control w-full">
-                                    <label class="label">
-                                        <span class="label-text font-semibold">CVV</span>
-                                    </label>
-                                    <input type="text" id="card_cvv" name="card_cvv" placeholder="123" maxlength="4"
-                                        required
-                                        class="input input-bordered w-full font-mono text-lg focus:input-primary">
-                                </div>
-                            </div>
-
-                            <!-- Cardholder Name -->
-                            <div class="form-control w-full">
-                                <label class="label">
-                                    <span class="label-text font-semibold">Cardholder Name</span>
-                                </label>
-                                <input type="text" id="card_name" name="card_name" placeholder="NAME ON CARD" required
-                                    class="input input-bordered w-full font-medium uppercase focus:input-primary">
-                            </div>
-                        </div>
-
-                        @if($errors->any())
-                            <div role="alert" class="alert alert-error">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <!-- Manual Payment Instructions -->
+                        <div class="bg-primary/5 border border-primary/20 rounded-2xl p-6 mb-8">
+                            <h4 class="font-bold text-primary mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span>{{ $errors->first() }}</span>
+                                Bank Transfer Details
+                            </h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between border-b border-primary/10 pb-2">
+                                    <span class="text-base-content/60">Bank Name</span>
+                                    <span class="font-bold">AlphaMode Global Bank</span>
+                                </div>
+                                <div class="flex justify-between border-b border-primary/10 pb-2">
+                                    <span class="text-base-content/60">Account Number</span>
+                                    <span class="font-bold italic">0123456789</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-base-content/60">Account Name</span>
+                                    <span class="font-bold">ALPHAMODE FITNESS LTD</span>
+                                </div>
                             </div>
-                        @endif
+                        </div>
+
+                        <!-- Receipt Upload -->
+                        <div class="form-control w-full group/field">
+                            <label class="label mb-2">
+                                <span class="label-text font-bold text-base-content">Upload Payment Receipt</span>
+                            </label>
+                            <div class="relative">
+                                <input type="file" name="receipt" id="receipt" accept="image/*" required
+                                    class="file-input file-input-bordered file-input-primary w-full bg-base-content/5 border-none h-16 rounded-2xl font-bold pl-0 pr-4 group-focus-within/field:bg-base-content/10 transition-all">
+                            </div>
+                            <p class="text-[10px] text-base-content/40 mt-2 italic uppercase tracking-widest">Format: JPG, PNG (Max 5MB)</p>
+                            @error('receipt')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}</p>@enderror
+                        </div>
 
                         <!-- Pay Button -->
-                        <button id="payBtn" type="button"
-                            class="btn btn-primary btn-lg w-full rounded-xl shadow-lg shadow-primary/30 hover:shadow-primary/50 text-xl font-bold">
+                        <button id="payBtn" type="submit"
+                            class="btn btn-primary btn-lg w-full rounded-2xl shadow-lg shadow-primary/30 hover:shadow-primary/50 text-xl font-bold mt-6 h-16">
                             <span class="flex items-center gap-2">
-                                Pay ${{ number_format($amount, 0) }}
+                                Submit Receipt
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                 </svg>
                             </span>
                         </button>
@@ -222,7 +180,7 @@
                                     d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="font-medium">Your payment is encrypted and secure</span>
+                            <span class="font-medium">Secure Verification Protocol Active</span>
                         </div>
                     </form>
                 </div>
@@ -257,122 +215,23 @@
                 </div>
             </div>
 
-            <h2 class="text-2xl font-display font-bold mb-3 text-base-content">Processing Payment…</h2>
-            <p id="processingText" class="text-base-content/70 font-medium">Initializing gateway…</p>
+            <h2 class="text-2xl font-display font-bold mb-3 text-base-content">Processing...</h2>
+            <p id="processingText" class="text-base-content/70 font-medium">Uploading your receipt...</p>
         </div>
     </div>
 
     <script>
         const payBtn = document.getElementById('payBtn');
         const modal = document.getElementById('gatewayModal');
-        const processingText = document.getElementById('processingText');
         const form = document.getElementById('paymentForm');
 
-        // Card input elements
-        const cardNumber = document.getElementById('card_number');
-        const cardExpiry = document.getElementById('card_expiry');
-        const cardCVV = document.getElementById('card_cvv');
-        const cardName = document.getElementById('card_name');
-
-        // Format card number with spaces (1234 5678 9012 3456)
-        cardNumber.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            e.target.value = formattedValue;
-        });
-
-        // Format expiry date as MM/YY
-        cardExpiry.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
-
-        // CVV - numbers only
-        cardCVV.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-
-        // Cardholder name - letters and spaces only
-        cardName.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
-        });
-
-        payBtn.addEventListener('click', () => {
-
-            // Validate card details
-            const cardNumberValue = cardNumber.value.replace(/\s/g, '');
-            const cardExpiryValue = cardExpiry.value;
-            const cardCVVValue = cardCVV.value;
-            const cardNameValue = cardName.value.trim();
-
-            // Check if all fields are filled
-            if (!cardNumberValue || !cardExpiryValue || !cardCVVValue || !cardNameValue) {
-                alert("Please fill in all card details.");
-                return;
-            }
-
-            // Validate card number (should be 13-19 digits)
-            if (cardNumberValue.length < 13 || cardNumberValue.length > 19) {
-                alert("Please enter a valid card number.");
-                cardNumber.focus();
-                return;
-            }
-
-            // Validate expiry format (MM/YY)
-            if (!/^\d{2}\/\d{2}$/.test(cardExpiryValue)) {
-                alert("Please enter expiry date in MM/YY format.");
-                cardExpiry.focus();
-                return;
-            }
-
-            // Validate expiry date is not in the past
-            const [month, year] = cardExpiryValue.split('/').map(Number);
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear() % 100;
-            const currentMonth = currentDate.getMonth() + 1;
-
-            if (year < currentYear || (year === currentYear && month < currentMonth)) {
-                alert("Card has expired. Please use a valid card.");
-                cardExpiry.focus();
-                return;
-            }
-
-            if (month < 1 || month > 12) {
-                alert("Please enter a valid month (01-12).");
-                cardExpiry.focus();
-                return;
-            }
-
-            // Validate CVV (3 or 4 digits)
-            if (cardCVVValue.length < 3 || cardCVVValue.length > 4) {
-                alert("Please enter a valid CVV (3 or 4 digits).");
-                cardCVV.focus();
-                return;
-            }
-
-            // Validate cardholder name
-            if (cardNameValue.length < 3) {
-                alert("Please enter the cardholder name.");
-                cardName.focus();
-                return;
-            }
-
-            // All validations passed, proceed with payment
+        form.addEventListener('submit', (e) => {
+            // Show modal
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-
+            
             payBtn.disabled = true;
             payBtn.classList.add('opacity-70');
-
-            setTimeout(() => processingText.innerText = "Connecting to bank…", 1200);
-            setTimeout(() => processingText.innerText = "Verifying card details…", 2200);
-            setTimeout(() => {
-                processingText.innerText = "Payment successful!";
-                setTimeout(() => form.submit(), 1000);
-            }, 3500);
         });
     </script>
 

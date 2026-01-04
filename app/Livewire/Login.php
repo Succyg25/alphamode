@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Login')]
 class Login extends Component
 {
     public $email;

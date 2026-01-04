@@ -23,6 +23,10 @@ class User extends Authenticatable
         'email',
         'role',
         'current_plan_id',
+        'profile_photo',
+        'phone',
+        'birth_date',
+        'fitness_goals',
         'password',
     ];
 
@@ -72,5 +76,19 @@ class User extends Authenticatable
     public function isTrainer()
     {
         return $this->role === 'trainer'; // or admin?
+    }
+
+    public function workoutRoutines()
+    {
+        return $this->hasMany(WorkoutRoutine::class);
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->profile_photo) {
+            return asset('storage/' . $this->profile_photo);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
 }

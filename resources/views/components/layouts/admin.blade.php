@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard') - {{ config('app.name') }}</title>
+    <title>{{ isset($title) ? $title . ' | ' : '' }}{{ config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,6 +119,15 @@
                             </svg>
                             <span class="font-semibold flex-1">Schedule</span>
                         </a>
+
+                        <a href="{{ route('admin.payments') }}"
+                            class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition {{ request()->routeIs('admin.payments') ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30' : 'text-gray-700 dark:text-gray-300' }}">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            </svg>
+                            <span class="font-semibold flex-1">Manual Payments</span>
+                        </a>
                     </div>
 
                     <!-- System Section -->
@@ -167,27 +176,20 @@
                                 <path d="M17.293 10a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </button>
+                    </div>
+                </div>
+            </header>
 
+            <!-- Page Content -->
+            <main class="flex-1 px-4 md:px-8 py-8 overflow-y-auto">
+                {{ $slot }}
+            </main>
+        </div>
 
-
-                        // Mobile menu toggle
-                        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-
-                        const sidebar = document.getElementById('sidebar');
-                        const mobileOverlay = document.getElementById('mobile-overlay');
-
-                        if (mobileMenuBtn) {
-                        mobileMenuBtn.addEventListener('click', () => {
-                        sidebar.classList.toggle('-translate-x-full');
-                        mobileOverlay.classList.toggle('hidden');
-                        });
-
-                        mobileOverlay.addEventListener('click', () => {
-                        sidebar.classList.add('-translate-x-full');
-                        mobileOverlay.classList.add('hidden');
-                        });
-                        }
-                        </script>
+        <!-- Mobile Overlay -->
+        <div id="mobile-overlay"
+            class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-35 transition-opacity lg:hidden"></div>
+    </div>
 
 </body>
 

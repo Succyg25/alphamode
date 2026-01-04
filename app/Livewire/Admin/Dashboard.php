@@ -8,10 +8,12 @@ use App\Models\Plan;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Models\WorkoutClass;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Admin Dashboard')]
 class Dashboard extends Component
 {
     public function render()

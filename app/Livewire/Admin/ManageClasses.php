@@ -4,10 +4,12 @@ namespace App\Livewire\Admin;
 
 use App\Models\Trainer;
 use App\Models\WorkoutClass;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Manage Classes')]
 class ManageClasses extends Component
 {
     public $classes, $name, $description, $capacity, $trainer_id, $class_id;

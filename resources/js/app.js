@@ -36,11 +36,28 @@ document.addEventListener("DOMContentLoaded", () => {
         applyTheme(false);
     }
 
-    // Event Listener
+    // Event Listener for Theme Toggle
     if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
             const isDark = html.classList.contains("dark");
             applyTheme(!isDark);
+        });
+    }
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const sidebar = document.getElementById("sidebar");
+    const mobileOverlay = document.getElementById("mobile-overlay");
+
+    if (mobileMenuBtn && sidebar && mobileOverlay) {
+        mobileMenuBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+            mobileOverlay.classList.toggle("hidden");
+        });
+
+        mobileOverlay.addEventListener("click", () => {
+            sidebar.classList.add("-translate-x-full");
+            mobileOverlay.classList.add("hidden");
         });
     }
 });

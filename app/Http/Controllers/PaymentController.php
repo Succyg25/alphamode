@@ -43,13 +43,24 @@ class PaymentController extends Controller
     {
         $request->validate([
             'plan_id' => 'required|exists:plans,id',
-            // Payment card details would be validated by gateway in real app
+            'receipt' => 'required|image|max:5120', // Max 5MB
         ]);
 
         $user = Auth::user();
-        $user->current_plan_id = $request->plan_id;
-        $user->save();
+        $plan = Plan::findOrFail($request->plan_id);
 
-        return redirect()->route('dashboard')->with('message', 'Payment successful! You are now subscribed.');
+        if ($request->hasFile('receipt')) {
+            $path = $request->file('receipt')->store('receipts', 'public');
+
+            \App\Models\PaymentTransaction::create([
+                'user_id' => $user->id,
+                'plan_id' => $plan->id,
+                'amount' => $plan->price,
+                'receipt_path' => $path,
+                'status' => 'pending',
+            ]);
+        }
+
+        return redirect()->route('dashboard')->with('message', 'Receipt uploaded successfully! Your plan will be activated once verified by our team.');
     }
 }

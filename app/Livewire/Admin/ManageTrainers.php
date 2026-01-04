@@ -5,10 +5,12 @@ namespace App\Livewire\Admin;
 use App\Models\Trainer;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Manage Trainers')]
 class ManageTrainers extends Component
 {
     public $trainers, $name, $email, $bio, $specialties, $trainer_id, $password;

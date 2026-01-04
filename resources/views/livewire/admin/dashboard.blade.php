@@ -1,223 +1,379 @@
-@section('title', 'Admin Dashboard')
+@section('title', 'Admin Hub')
 
-<div class="space-y-8">
-    {{-- Key Metrics Cards --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+<div class="space-y-12">
+    <!-- Key Metrics Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {{-- Total Members --}}
-        <div class="relative group h-full">
+        <div class="relative group">
             <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-2xl blur opacity-20 group-hover:opacity-30 transition">
+                class="absolute -inset-0.5 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-[2.5rem] blur opacity-30 group-hover:opacity-50 transition duration-500">
             </div>
             <div
-                class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 h-full flex flex-col">
-                <div class="flex items-center justify-between mb-auto">
-                    <div>
-                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Total Members</p>
-                        <p class="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400">{{ $totalMembers }}</p>
+                class="relative bg-base-100/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-base-content/5 shadow-2xl overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                <div
+                    class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                </div>
+
+                <div class="relative flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:rotate-6 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <span
+                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Collective</span>
                     </div>
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/50 dark:to-emerald-800/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Active
+                            Population</p>
+                        <h3
+                            class="text-4xl font-display font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            {{ number_format($totalMembers) }}
+                        </h3>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Active gym members</p>
             </div>
         </div>
 
         {{-- Monthly Bookings --}}
-        <div class="relative group h-full">
+        <div class="relative group">
             <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-2xl blur opacity-20 group-hover:opacity-30 transition">
+                class="absolute -inset-0.5 bg-gradient-to-tr from-secondary/20 to-accent/20 rounded-[2.5rem] blur opacity-30 group-hover:opacity-50 transition duration-500">
             </div>
             <div
-                class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 h-full flex flex-col">
-                <div class="flex items-center justify-between mb-auto">
-                    <div>
-                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Monthly Bookings</p>
-                        <p class="text-2xl md:text-3xl font-bold text-yellow-600 dark:text-yellow-400">{{ $monthlyBookings }}</p>
+                class="relative bg-base-100/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-base-content/5 shadow-2xl overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                <div
+                    class="absolute bottom-0 right-0 -mr-4 -mb-4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                </div>
+
+                <div class="relative flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary group-hover:rotate-6 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span
+                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Momentum</span>
                     </div>
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/50 dark:to-yellow-800/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
+
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Cycle
+                            Sessions</p>
+                        <h3
+                            class="text-4xl font-display font-black bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                            {{ number_format($monthlyBookings) }}
+                        </h3>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Class reservations this month</p>
             </div>
         </div>
 
         {{-- Active Trainers --}}
-        <div class="relative group h-full">
+        <div class="relative group">
             <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl blur opacity-20 group-hover:opacity-30 transition">
+                class="absolute -inset-0.5 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-[2.5rem] blur opacity-30 group-hover:opacity-50 transition duration-500">
             </div>
             <div
-                class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 h-full flex flex-col">
-                <div class="flex items-center justify-between mb-auto">
-                    <div>
-                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Active Trainers</p>
-                        <p class="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">{{ $activeTrainers }}</p>
+                class="relative bg-base-100/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-base-content/5 shadow-2xl overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-accent/5 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700">
+                </div>
+
+                <div class="relative flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent group-hover:rotate-6 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <span
+                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Operators</span>
                     </div>
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/50 dark:to-blue-800/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
+
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Elite
+                            Personnel</p>
+                        <h3
+                            class="text-4xl font-display font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                            {{ number_format($activeTrainers) }}
+                        </h3>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Staff members available</p>
             </div>
         </div>
 
         {{-- Est. Revenue --}}
-        <div class="relative group h-full">
+        <div class="relative group">
             <div
-                class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl blur opacity-20 group-hover:opacity-30 transition">
+                class="absolute -inset-0.5 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-[2.5rem] blur opacity-40 group-hover:opacity-60 transition duration-500">
             </div>
             <div
-                class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 h-full flex flex-col">
-                <div class="flex items-center justify-between mb-2">
-                    <div>
-                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Est. Monthly Revenue</p>
-                        <p class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">${{ number_format($currentMonthRevenue, 2) }}
-                        </p>
+                class="relative bg-base-100/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-base-content/5 shadow-2xl overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+
+                <div class="relative flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-14 h-14 bg-success/10 rounded-2xl flex items-center justify-center text-success group-hover:rotate-6 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span
+                            class="text-xs font-black uppercase tracking-[0.2em] text-base-content/30 italic">Capital</span>
                     </div>
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/50 dark:to-purple-800/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40 mb-1">Projected
+                            Inflow</p>
+                        <h3 class="text-3xl font-display font-black text-white">
+                            ${{ number_format($currentMonthRevenue, 2) }}
+                        </h3>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-auto">Based on active plans</p>
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-        {{-- Activity & Schedule (2/3 width) --}}
-        <div class="lg:col-span-2 space-y-6">
-            {{-- Upcoming Classes --}}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Main Activity Column -->
+        <div class="lg:col-span-8 space-y-12">
+            {{-- Upcoming Schedule Feed --}}
             <div class="relative group">
                 <div
-                    class="absolute -inset-1 bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 rounded-3xl blur-xl opacity-20 transition">
+                    class="absolute -inset-1 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-[3rem] blur-2xl opacity-50">
                 </div>
-                <div class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                <div
+                    class="relative bg-base-100/60 backdrop-blur-xl rounded-[3rem] border border-base-content/5 shadow-2xl overflow-hidden">
                     <div
-                        class="px-4 md:px-8 py-4 md:py-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20">
-                        <h3 class="text-xl md:text-2xl font-display font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        class="px-10 py-8 border-b border-base-content/5 flex items-center justify-between bg-gradient-to-r from-base-content/5 to-transparent">
+                        <div>
+                            <h3
+                                class="text-2xl font-display font-black uppercase tracking-tighter text-base-content italic">
+                                Operational Schedule</h3>
+                            <p class="text-xs font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">Next
+                                Phase Synchronizations</p>
+                        </div>
+                        <div class="w-12 h-12 bg-base-content/5 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Upcoming Schedule
-                        </h3>
-                        <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">Next 5 scheduled classes</p>
+                        </div>
                     </div>
 
-                    <div class="p-4 md:p-6 space-y-4">
+                    <div class="p-10 space-y-6">
                         @forelse($upcomingClasses as $class)
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-3 md:p-4 bg-orange-50/50 dark:bg-orange-900/20 rounded-xl hover:bg-orange-100/50 dark:hover:bg-orange-900/30 transition border border-orange-100 dark:border-orange-800/30">
+                            <div
+                                class="group/item relative flex items-center gap-6 p-6 rounded-3xl bg-base-content/5 border border-transparent hover:border-primary/20 hover:bg-primary/5 transition-all duration-300">
+                                <div class="flex-shrink-0">
+                                    <div class="relative">
+                                        <div
+                                            class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-base-content/10 group-hover/item:border-primary/30 transition-colors">
+                                            <img src="{{ $class->workoutClass->trainer->user->profile_photo_url }}"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <div
+                                            class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-lg flex items-center justify-center border-2 border-base-100">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="flex-1 min-w-0">
-                                    <p class="font-semibold text-gray-900 dark:text-gray-100 truncate">{{ $class->workoutClass->name }}</p>
-                                    <p class="text-xs md:text-sm text-gray-600 dark:text-gray-300">
-                                         with {{ $class->workoutClass->trainer->user->name }} • 
-                                         {{ $class->start_time->format('M d, H:i') }}
+                                    <h4
+                                        class="text-lg font-bold text-base-content truncate group-hover/item:text-primary transition-colors">
+                                        {{ $class->workoutClass->name }}</h4>
+                                    <p class="text-xs font-black uppercase tracking-widest text-base-content/40">
+                                        Op: {{ $class->workoutClass->trainer->user->name }} • <span
+                                            class="text-primary/70">{{ $class->start_time->format('H:i') }} HRS</span>
                                     </p>
                                 </div>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200">
-                                    {{ $class->start_time->diffForHumans() }}
-                                </span>
+
+                                <div class="text-right">
+                                    <div class="text-xs font-black text-primary/60 uppercase tracking-tighter mb-1">
+                                        {{ $class->start_time->format('M d') }}</div>
+                                    <span
+                                        class="inline-flex px-3 py-1 bg-primary/10 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">
+                                        {{ $class->start_time->diffForHumans() }}
+                                    </span>
+                                </div>
                             </div>
                         @empty
-                            <p class="text-center text-gray-500 dark:text-gray-400 py-4">No upcoming classes scheduled.</p>
+                            <div class="text-center py-12">
+                                <p class="text-xs font-black uppercase tracking-[0.4em] text-base-content/20">Zero Active
+                                    Schedule</p>
+                            </div>
                         @endforelse
                     </div>
                 </div>
             </div>
 
-            {{-- New Members --}}
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl blur-xl opacity-20 transition"></div>
-                <div class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <div class="px-4 md:px-8 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
-                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white">Newest Members</h3>
-                    </div>
-                    <div class="p-4 md:p-6 space-y-4">
+            {{-- Newest Members Table --}}
+            <div
+                class="bg-base-100/40 backdrop-blur-xl rounded-[3rem] border border-base-content/5 shadow-2xl overflow-hidden">
+                <div
+                    class="px-10 py-8 border-b border-base-content/5 bg-gradient-to-r from-emerald-500/5 to-transparent">
+                    <h3 class="text-xl font-display font-black uppercase tracking-tighter text-base-content italic">
+                        Recent Inductees</h3>
+                    <p class="text-xs font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">Latest biological
+                        units Added</p>
+                </div>
+                <div class="p-4 md:p-10">
+                    <div class="space-y-4">
                         @forelse($recentMembers as $member)
-                            <div class="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition border border-transparent hover:border-gray-200 dark:hover:border-gray-700">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-sm">
-                                        {{ substr($member->name, 0, 1) }}
+                            <div
+                                class="flex items-center justify-between p-4 rounded-2xl hover:bg-base-content/5 group-hover:translate-x-1 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 p-0.5">
+                                        <div
+                                            class="w-full h-full rounded-[0.7rem] bg-base-100 flex items-center justify-center overflow-hidden">
+                                            @if($member->profile_photo)
+                                                <img src="{{ $member->profile_photo_url }}" class="w-full h-full object-cover">
+                                            @else
+                                                <span
+                                                    class="text-sm font-black text-emerald-500">{{ substr($member->name, 0, 1) }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div>
-                                        <p class="font-semibold text-gray-900 dark:text-gray-100">{{ $member->name }}</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ $member->email }}</p>
+                                        <p class="font-bold text-base-content">{{ $member->name }}</p>
+                                        <p class="text-[10px] font-black uppercase tracking-widest text-base-content/40">
+                                            {{ $member->email }}</p>
                                     </div>
                                 </div>
-                                <span class="text-xs text-gray-400">{{ $member->created_at->diffForHumans() }}</span>
+                                <div class="text-right">
+                                    <div class="text-[10px] font-black uppercase tracking-widest text-base-content/30">
+                                        {{ $member->created_at->format('d M') }}</div>
+                                    <div class="text-xs font-bold text-emerald-500/60 uppercase">
+                                        {{ $member->created_at->diffForHumans(null, true) }} ago</div>
+                                </div>
                             </div>
                         @empty
-                            <p class="text-center text-gray-500 dark:text-gray-400">No new members found.</p>
+                            <p class="text-center py-6 text-base-content/20 uppercase font-black tracking-widest text-xs">
+                                Awaiting Induction</p>
                         @endforelse
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- Recent Activity Feed --}}
-        <div class="lg:col-span-1">
-            <div class="relative group sticky top-24">
-                <div
-                    class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-xl opacity-15 transition">
-                </div>
-                <div class="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <div class="px-4 md:px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                        <h3 class="text-lg md:text-xl font-display font-bold text-gray-900 dark:text-white">Recent Activity</h3>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Latest system actions</p>
+        <!-- System Feed Column -->
+        <div class="lg:col-span-4 space-y-12">
+            <div class="sticky top-12 space-y-12">
+                {{-- Live Activity Log --}}
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-b from-primary/20 to-secondary/20 rounded-[3rem] blur-xl opacity-30">
                     </div>
+                    <div
+                        class="relative bg-base-100/60 backdrop-blur-xl rounded-[3rem] border border-base-content/5 shadow-2xl overflow-hidden flex flex-col max-h-[850px]">
+                        <div class="px-8 py-8 border-b border-base-content/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-primary animate-ping"></div>
+                                <h3
+                                    class="text-lg font-display font-black uppercase tracking-tighter text-base-content italic">
+                                    Alpha Feed</h3>
+                            </div>
+                            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-base-content/30 mt-1">
+                                Real-time Node Activity</p>
+                        </div>
 
-                    <div class="p-4 md:p-6 max-h-[600px] overflow-y-auto">
-                        @if($recentActivity->count() > 0)
-                            <div class="space-y-4">
-                                @foreach($recentActivity as $activity)
-                                    <div class="flex gap-3 text-sm">
-                                        <div class="flex-shrink-0 mt-0.5">
-                                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-                                            </div>
+                        <div class="flex-1 p-8 space-y-8 overflow-y-auto custom-scrollbar">
+                            @forelse($recentActivity as $activity)
+                                <div class="relative pl-8 border-l border-base-content/10">
+                                    <div
+                                        class="absolute left-0 top-0 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-base-100 shadow-[0_0_10px_rgba(var(--p),0.5)]">
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <div class="text-[10px] font-black uppercase tracking-widest text-primary/70">
+                                            {{ $activity->created_at->diffForHumans() }}
                                         </div>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-gray-900 dark:text-gray-200 font-medium">
-                                                <span class="font-semibold">{{ $activity->user->name }}</span>
-                                                booked
-                                                <span class="font-semibold">{{ $activity->schedule->workoutClass->name }}</span>
-                                            </p>
-                                            <p class="text-xs text-gray-400 mt-0.5">{{ $activity->created_at->diffForHumans() }}</p>
+                                        <p class="text-sm leading-relaxed text-base-content/80">
+                                            <span class="font-bold text-base-content">{{ $activity->user->name }}</span>
+                                            committed to
+                                            <span
+                                                class="font-bold text-primary">{{ $activity->schedule->workoutClass->name }}</span>
+                                        </p>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 bg-base-content/5 rounded-xl w-fit">
+                                            <svg class="w-3 h-3 text-base-content/40" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span
+                                                class="text-[10px] font-black uppercase tracking-widest text-base-content/40">
+                                                {{ $activity->schedule->start_time->format('H:i') }}
+                                            </span>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            @empty
+                                <div
+                                    class="text-center py-8 opacity-20 italic text-xs uppercase tracking-widest font-black">
+                                    Passive State
+                                </div>
+                            @endforelse
+                        </div>
+
+                        <div class="p-6 bg-gradient-to-t from-base-content/5 to-transparent flex justify-center">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-base-content/20 italic">End
+                                of Log</span>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Status Monitor --}}
+                <div class="bg-primary/5 rounded-[2.5rem] p-8 border border-primary/10">
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-primary mb-6">System Health</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
+                            <span class="text-base-content/40">API Status</span>
+                            <span class="text-success">Optimal</span>
+                        </div>
+                        <div class="w-full bg-base-content/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-primary h-full w-[94%]" style="box-shadow: 0 0 10px rgba(var(--p), 0.3)">
                             </div>
-                        @else
-                            <div class="text-center py-8">
-                                <p class="text-gray-500 dark:text-gray-400 text-sm">No recent activity</p>
-                            </div>
-                        @endif
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
+                            <span class="text-base-content/40">Node Load</span>
+                            <span class="text-primary">Low Heat</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(var(--bc), 0.1);
+            border-radius: 10px;
+        }
+    </style>
 </div>

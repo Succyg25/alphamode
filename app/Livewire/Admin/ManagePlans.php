@@ -3,10 +3,12 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Plan;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('components.layouts.admin')]
+#[Title('Manage Plans')]
 class ManagePlans extends Component
 {
     public $plans, $name, $price, $duration_days, $description, $plan_id;

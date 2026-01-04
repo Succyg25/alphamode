@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
         // Seed Trainers (constant data)
         $this->call(TrainerSeeder::class);
 
+        // Seed Training Programs & Routines
+        $this->call(TrainingProgramSeeder::class);
+
+        // Seed Coaching Videos
+        $this->call(CoachingVideoSeeder::class);
+
         // Admin User
         User::create([
             'name' => 'Administrator',

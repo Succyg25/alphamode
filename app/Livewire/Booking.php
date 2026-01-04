@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Trainer;
 use App\Models\ClassSchedule;
 use App\Models\Booking as BookingModel;
 use Illuminate\Support\Facades\Auth;
 
+#[Title('Book a Class')]
 class Booking extends Component
 {
     public $trainer;
@@ -46,7 +48,7 @@ class Booking extends Component
             'class_schedule_id' => $this->selectedSchedule->id,
         ]);
 
-        session()->flash('feedback', 'Class booked successfully!');
+        session()->flash('feedback', 'PROTOCOL ENGAGEMENT VALIDATED. INDUCTION SLOT SECURED.');
         return redirect()->route('dashboard');
     }
 
