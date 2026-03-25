@@ -115,7 +115,7 @@
                             <div class="relative flex items-center justify-center gap-4">
                                 <span
                                     class="font-display font-bold uppercase tracking-wider text-sm text-primary-content">Validate
-                                    Login</span>
+                                    Credentials</span>
                                 <svg class="w-6 h-6 text-primary-content group-hover/btn:translate-x-1 transition-transform"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"

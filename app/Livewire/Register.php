@@ -44,6 +44,7 @@ class Register extends Component
             'phone' => $this->phone,
             'birth_date' => $this->birth_date,
             'fitness_goals' => $this->fitness_goals,
+            'membership_status' => 'inactive', // Set to inactive by default
         ]);
 
         session()->flash('feedback', 'Account Created Successfully! Please login.');

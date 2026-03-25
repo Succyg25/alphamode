@@ -4,236 +4,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment – {{ config('app.name') }}</title>
+    <title>Checkout | {{ config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        .font-sans {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        [x-cloak] {
+            display: none !important;
         }
 
-        .font-display {
-            font-family: 'Space Grotesk', sans-serif;
+        body {
+            font-family: 'Outfit', sans-serif;
         }
     </style>
 </head>
 
-<body class="font-sans antialiased bg-base-200 min-h-screen text-base-content">
+<body class="bg-base-200 min-h-screen text-base-content antialiased" x-data="{ 
+        paymentMethod: 'card',
+        cardNumber: '',
+        cardExpiry: '',
+        cardCvc: '',
+        isProcessing: false,
+        processingMessage: 'Initializing Payment',
+        messages: [
+            'Initializing Payment',
+            'Processing Transaction',
+            'Transmitting Data',
+            'Securing Tier',
+            'Finalizing'
+        ],
+        messageIndex: 0,
+        startProcessing() {
+            this.isProcessing = true;
+            let interval = setInterval(() => {
+                if (!this.isProcessing) {
+                    clearInterval(interval);
+                    return;
+                }
+                this.messageIndex = (this.messageIndex + 1) % this.messages.length;
+                this.processingMessage = this.messages[this.messageIndex];
+            }, 1500);
+        },
+        formatCardNumber(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            val = val.substring(0, 16);
+            this.cardNumber = val.replace(/(\d{4})(?=\d)/g, '$1 ');
+        },
+        formatExpiry(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            val = val.substring(0, 4);
+            if (val.length > 2) {
+                this.cardExpiry = val.substring(0, 2) + '/' + val.substring(2);
+            } else {
+                this.cardExpiry = val;
+            }
+        },
+        formatCvc(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            this.cardCvc = val.substring(0, 3);
+        }
+    }">
 
-    <!-- Floating Background Elements -->
+    <!-- Ambient background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div class="absolute top-20 -left-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-pulse"
-            style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 left-1/3 w-72 h-72 bg-accent/15 rounded-full blur-3xl animate-pulse"
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse">
+        </div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] animate-pulse"
             style="animation-delay: 2s;"></div>
     </div>
 
-    <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-lg w-full space-y-8">
+    <div class="min-h-screen py-12 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-            <!-- Header -->
-            <div class="text-center">
-                <!-- Logo -->
-                <div class="flex justify-center mb-6">
-                    <div class="relative group">
-                        <div
-                            class="absolute inset-0 bg-primary/30 rounded-2xl blur-md group-hover:opacity-70 transition-all duration-300">
+            <!-- Left Column: Checkout Form (7 col) -->
+            <div class="lg:col-span-7 space-y-8">
+                <div class="flex items-center gap-4 mb-2">
+                    <a href="{{ route('plans') }}"
+                        class="w-10 h-10 rounded-xl bg-base-100 flex items-center justify-center text-base-content/40 hover:text-primary transition-all shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </a>
+                    <h1 class="text-3xl font-black tracking-tight italic uppercase">Checkout</h1>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button" @click="paymentMethod = 'card'"
+                        :class="paymentMethod === 'card' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-base-content/10 bg-base-100 hover:border-primary/50'"
+                        class="relative p-6 rounded-3xl border-2 transition-all group overflow-hidden text-left">
+                        <div class="absolute top-2 right-2" x-show="paymentMethod === 'card'">
+                            <span class="flex h-3 w-3"><span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span
+                                    class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span></span>
                         </div>
                         <div
-                            class="relative w-16 h-16 bg-base-100 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-xl p-3 border border-base-content/5">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-10 h-10 text-primary">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            class="mb-4 w-12 h-12 rounded-2xl bg-base-200 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                             </svg>
                         </div>
+                        <h3 class="font-black italic uppercase text-xs tracking-wider mb-1">Electronic</h3>
+                        <p class="text-[10px] font-bold text-base-content/40 uppercase tracking-widest">MasterCard /
+                            Visa</p>
+                    </button>
+
+                    <button type="button" @click="paymentMethod = 'manual'"
+                        :class="paymentMethod === 'manual' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-base-content/10 bg-base-100 hover:border-primary/50'"
+                        class="relative p-6 rounded-3xl border-2 transition-all group overflow-hidden text-left">
+                        <div class="absolute top-2 right-2" x-show="paymentMethod === 'manual'">
+                            <span class="flex h-3 w-3"><span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span
+                                    class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span></span>
+                        </div>
+                        <div
+                            class="mb-4 w-12 h-12 rounded-2xl bg-base-200 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="font-black italic uppercase text-xs tracking-wider mb-1">Direct</h3>
+                        <p class="text-[10px] font-bold text-base-content/40 uppercase tracking-widest">Manual Transfer
+                        </p>
+                    </button>
+                </div>
+
+                <form action="{{ route('payment.process') }}" method="POST" enctype="multipart/form-data"
+                    @submit="startProcessing()" class="space-y-8">
+                    @csrf
+                    <input type="hidden" name="plan_id" value="{{ $planId }}">
+                    <input type="hidden" name="payment_method" :value="paymentMethod">
+
+                    <!-- Card Payment Form -->
+                    <div x-show="paymentMethod === 'card'" x-cloak class="space-y-6 animate-fade-in">
+                        <div class="p-8 rounded-[2.5rem] bg-base-100 border border-base-content/5 shadow-2xl space-y-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-sm font-black uppercase tracking-[0.2em] text-primary">Card Details</h2>
+                                <div class="flex gap-2">
+                                    <div class="h-6 w-10 bg-base-200 rounded-md"></div>
+                                    <div class="h-6 w-10 bg-base-200 rounded-md"></div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="form-control w-full">
+                                    <label class="label"><span
+                                            class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Cardholder
+                                            Name</span></label>
+                                    <input type="text" placeholder="FULL NAME"
+                                        class="input input-bordered h-14 rounded-2xl border-2 border-base-content/5 focus:border-primary transition-all font-bold uppercase tracking-wider text-sm">
+                                </div>
+
+                                <div class="form-control w-full">
+                                    <label class="label"><span
+                                            class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Card
+                                            Number</span></label>
+                                    <div class="relative">
+                                        <input type="text" placeholder="0000 0000 0000 0000" x-model="cardNumber"
+                                            @input="formatCardNumber"
+                                            class="input input-bordered w-full h-14 rounded-2xl border-2 border-base-content/5 focus:border-primary transition-all font-bold tracking-widest text-sm">
+                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M2.5 12h2.5c0 .351.056.688.16 1h-2.66zm5.16-1c-.104.312-.16.649-.16 1s.056.688.16 1h8.68c.104-.312.16-.649.16-1s-.056-.688-.16-1h-8.68zm11.34 2c.104-.312.16-.649.16-1s-.056-.688-.16-1h2.66c0 .351-.056.688-.16 1z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label"><span
+                                                class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">Expiry</span></label>
+                                        <input type="text" placeholder="MM/YY" x-model="cardExpiry"
+                                            @input="formatExpiry"
+                                            class="input input-bordered h-14 rounded-2xl border-2 border-base-content/5 focus:border-primary transition-all font-bold tracking-widest text-sm text-center">
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label"><span
+                                                class="label-text text-[10px] font-black uppercase tracking-widest text-base-content/40">CVC</span></label>
+                                        <input type="password" placeholder="***" x-model="cardCvc" @input="formatCvc"
+                                            class="input input-bordered h-14 rounded-2xl border-2 border-base-content/5 focus:border-primary transition-all font-bold tracking-widest text-sm text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Badge -->
-                <div class="badge badge-primary badge-outline gap-2 p-4 mb-4">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm font-semibold">Secure Payment</span>
-                </div>
+                    <!-- Manual Transfer Form -->
+                    <div x-show="paymentMethod === 'manual'" x-cloak class="space-y-6 animate-fade-in">
+                        <div class="p-8 rounded-[2.5rem] bg-base-100 border border-base-content/5 shadow-2xl space-y-8">
+                            <div>
+                                <h2 class="text-sm font-black uppercase tracking-[0.2em] text-primary mb-6">Transfer
+                                    Instructions</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-6 rounded-3xl bg-base-200 flex flex-col justify-center">
+                                        <p
+                                            class="text-[10px] font-black uppercase tracking-widest text-base-content/30 mb-1">
+                                            Bank Name</p>
+                                        <p class="font-black italic uppercase text-xs">AlphaMode Global</p>
+                                    </div>
+                                    <div class="p-6 rounded-3xl bg-base-200">
+                                        <p
+                                            class="text-[10px] font-black uppercase tracking-widest text-base-content/30 mb-1">
+                                            Account Number</p>
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-black text-sm tracking-widest">0123456789</p>
+                                            <button type="button"
+                                                class="text-primary hover:scale-110 transition-transform"><svg
+                                                    class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 00-2 2z" />
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <h1 class="text-4xl md:text-5xl font-display font-bold leading-tight mb-3">
-                    <span class="text-base-content">Secure</span>
-                    <br>
-                    <span class="text-primary">Payment</span>
-                </h1>
+                            <div class="form-control w-full space-y-4">
+                                <label class="label"><span class="label-text text-sm font-bold">Proof of
+                                        Transaction</span></label>
+                                <div
+                                    class="relative group/upload h-48 rounded-[2rem] border-2 border-dashed border-base-content/10 flex flex-col items-center justify-center bg-base- content/5 hover:border-primary/50 transition-all overflow-hidden">
+                                    <input type="file" name="receipt"
+                                        class="absolute inset-0 opacity-0 cursor-pointer z-10" accept="image/*"
+                                        @change="fileName = $event.target.files[0].name" x-data="{ fileName: '' }">
+                                    <svg class="w-12 h-12 text-base-content/20 mb-4 group-hover/upload:text-primary transition-colors"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                    <p class="text-xs font-black uppercase tracking-widest text-base-content/40"
+                                        x-text="fileName || 'Click to upload receipt'"></p>
+                                </div>
+                                @error('receipt')<p class="text-error text-xs font-bold">{{ $message }}</p>@enderror
+                            </div>
+                        </div>
+                    </div>
 
-                <p class="text-lg text-base-content/70">
-                    {{ $planName ?? 'Membership' }} Subscription
-                </p>
+                    <button type="submit" :disabled="isProcessing"
+                        class="group/btn relative w-full h-20 rounded-[1.5rem] overflow-hidden shadow-2xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-accent"></div>
+                        <div class="relative flex items-center justify-center gap-4">
+                            <span x-show="!isProcessing"
+                                class="font-black italic uppercase tracking-widest text-sm text-primary-content">Initialize
+                                Payment</span>
+                            <span x-show="isProcessing" x-cloak
+                                class="font-black italic uppercase tracking-widest text-sm text-primary-content">Processing...</span>
+                            <div x-show="!isProcessing"
+                                class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover/btn:rotate-45 transition-transform">
+                                <svg class="w-4 h-4 text-primary-content" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </div>
+                            <div x-show="isProcessing" x-cloak
+                                class="loading loading-spinner loading-md text-primary-content"></div>
+                        </div>
+                    </button>
+
+                    <div class="flex items-center justify-center gap-8 opacity-20">
+                        <div
+                            class="h-6 w-10 bg-base-content/50 rounded flex items-center justify-center text-[10px] font-black italic">
+                            VISA</div>
+                        <div
+                            class="h-6 w-10 bg-base-content/50 rounded flex items-center justify-center text-[10px] font-black italic">
+                            MC</div>
+                        <div
+                            class="h-6 w-10 bg-base-content/50 rounded flex items-center justify-center text-[10px] font-black italic">
+                            AES-256</div>
+                    </div>
+                </form>
             </div>
 
-            <!-- Amount Card -->
-            <div class="relative group">
+            <!-- Right Column: Order Summary (5 col) -->
+            <div class="lg:col-span-5">
                 <div
-                    class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500">
-                </div>
-                <div class="relative bg-base-100 rounded-2xl p-8 border border-primary/20 shadow-xl">
-                    <div class="text-center">
-                        <p class="text-sm font-semibold text-primary mb-2">Amount Due</p>
-                        <p class="text-6xl font-display font-bold text-base-content mb-2">
-                            ${{ number_format($amount, 2) }}</p>
-                        <p class="text-xs text-base-content/60 font-medium">Includes processing & verification</p>
+                    class="sticky top-12 p-10 rounded-[2.5rem] bg-base-100/50 backdrop-blur-2xl border border-base-content/5 shadow-2xl space-y-10">
+                    <div>
+                        <h2
+                            class="text-sm font-black uppercase tracking-[0.3em] text-base-content/40 mb-8 pb-4 border-b border-base-content/5">
+                            Summary</h2>
+
+                        <div class="space-y-6">
+                            <div class="flex flex-col">
+                                <p class="text-[10px] font-black uppercase tracking-widest text-primary mb-1">Biological
+                                    Identity</p>
+                                <p class="text-xl font-bold tracking-tight lowercase italic">{{ auth()->user()->name }}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <p class="text-[10px] font-black uppercase tracking-widest text-primary mb-1">
+                                    Performance Tier</p>
+                                <p class="text-2xl font-black italic uppercase tracking-tighter">{{ $planName }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Applicant Info -->
-            <div class="bg-base-100 rounded-xl p-5 border border-base-300 shadow-lg">
-                <h3 class="font-bold text-base-content mb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Subscriber Details
-                </h3>
-                <div class="text-sm text-base-content/70 space-y-2">
-                    <div class="flex justify-between">
-                        <span class="font-medium">Name:</span>
-                        <span class="font-semibold text-base-content">{{ $data['first_name'] ?? '' }}
-                            {{ $data['middle_name'] ?? '' }} {{ $data['last_name'] ?? '' }}</span>
+                    <div class="space-y-4 pt-10 border-t border-base-content/5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">Tier
+                                Basic</span>
+                            <span class="font-black tracking-tight">${{ number_format($amount, 2) }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">System
+                                Fee</span>
+                            <span class="font-black text-success tracking-tight">FREE</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center pt-4 mt-4 border-t-2 border-dashed border-base-content/5">
+                            <span class="font-black italic uppercase tracking-widest text-xs">Total Commitment</span>
+                            <span
+                                class="text-3xl font-black italic tracking-tighter text-primary">${{ number_format($amount, 2) }}</span>
+                        </div>
                     </div>
-                    <div class="flex justify-between">
-                        <span class="font-medium">Email:</span>
-                        <span class="font-semibold text-base-content">{{ $data['email'] ?? '' }}</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Payment Form -->
-            <div class="relative group">
-                <div
-                    class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl blur-xl opacity-15 group-hover:opacity-25 transition-opacity duration-500">
-                </div>
-
-                <div class="relative bg-base-100 p-8 rounded-3xl shadow-2xl border border-base-300">
-                    <form id="paymentForm" action="{{ route('payment.process') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        @csrf
-                        <input type="hidden" name="plan_id" value="{{ $planId ?? '' }}">
-
-                        <!-- Manual Payment Instructions -->
-                        <div class="bg-primary/5 border border-primary/20 rounded-2xl p-6 mb-8">
-                            <h4 class="font-bold text-primary mb-4 flex items-center gap-2">
+                    <div class="p-6 rounded-3xl bg-primary/10 border border-primary/20">
+                        <div class="flex gap-4">
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center text-primary-content shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
-                                Bank Transfer Details
-                            </h4>
-                            <div class="space-y-3 text-sm">
-                                <div class="flex justify-between border-b border-primary/10 pb-2">
-                                    <span class="text-base-content/60">Bank Name</span>
-                                    <span class="font-bold">AlphaMode Global Bank</span>
-                                </div>
-                                <div class="flex justify-between border-b border-primary/10 pb-2">
-                                    <span class="text-base-content/60">Account Number</span>
-                                    <span class="font-bold italic">0123456789</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-base-content/60">Account Name</span>
-                                    <span class="font-bold">ALPHAMODE FITNESS LTD</span>
-                                </div>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-widest mb-1 text-primary">Priority
+                                    Secured</p>
+                                <p
+                                    class="text-[10px] leading-relaxed text-base-content/60 font-medium uppercase tracking-tight">
+                                    Your data is encrypted using military-grade AES-256 protocols.</p>
                             </div>
                         </div>
-
-                        <!-- Receipt Upload -->
-                        <div class="form-control w-full group/field">
-                            <label class="label mb-2">
-                                <span class="label-text font-bold text-base-content">Upload Payment Receipt</span>
-                            </label>
-                            <div class="relative">
-                                <input type="file" name="receipt" id="receipt" accept="image/*" required
-                                    class="file-input file-input-bordered file-input-primary w-full bg-base-content/5 border-none h-16 rounded-2xl font-bold pl-0 pr-4 group-focus-within/field:bg-base-content/10 transition-all">
-                            </div>
-                            <p class="text-[10px] text-base-content/40 mt-2 italic uppercase tracking-widest">Format: JPG, PNG (Max 5MB)</p>
-                            @error('receipt')<p class="text-error text-[10px] font-black uppercase tracking-tighter mt-2">{{ $message }}</p>@enderror
-                        </div>
-
-                        <!-- Pay Button -->
-                        <button id="payBtn" type="submit"
-                            class="btn btn-primary btn-lg w-full rounded-2xl shadow-lg shadow-primary/30 hover:shadow-primary/50 text-xl font-bold mt-6 h-16">
-                            <span class="flex items-center gap-2">
-                                Submit Receipt
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                </svg>
-                            </span>
-                        </button>
-
-                        <!-- Security Note -->
-                        <div class="flex items-center justify-center text-xs text-base-content/50 gap-2">
-                            <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span class="font-medium">Secure Verification Protocol Active</span>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Back Link -->
-            <div class="text-center">
-                <a href="{{ route('plans') }}"
-                    class="text-sm text-base-content/60 hover:text-primary font-medium inline-flex items-center group transition-colors">
-                    <svg class="w-4 h-4 mr-1 transform group-hover:-translate-x-1 transition-transform" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    Return to Plans
-                </a>
             </div>
         </div>
     </div>
 
-    <!-- Payment Modal -->
-    <div id="gatewayModal"
-        class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-base-100 w-full max-w-md p-10 rounded-3xl shadow-2xl text-center mx-4 border border-base-300">
-            <div class="flex justify-center mb-6">
-                <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-primary animate-pulse" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
+    <!-- Full Screen Processing Overlay -->
+    <div x-show="isProcessing" x-cloak
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-base-300/60 backdrop-blur-md animate-fade-in">
+        <div class="relative">
+            <div
+                class="w-24 h-24 rounded-[2rem] bg-base-100 shadow-2xl flex items-center justify-center animate-bounce">
+                <svg class="w-12 h-12 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
             </div>
-
-            <h2 class="text-2xl font-display font-bold mb-3 text-base-content">Processing...</h2>
-            <p id="processingText" class="text-base-content/70 font-medium">Uploading your receipt...</p>
+            <div class="absolute -top-2 -right-2">
+                <span class="flex h-6 w-6">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-6 w-6 bg-primary"></span>
+                </span>
+            </div>
+        </div>
+        <div class="mt-8 text-center space-y-2">
+            <h2 x-text="processingMessage"
+                class="text-2xl font-black italic uppercase tracking-tighter bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent min-h-[1.5em]">
+                Initializing Payment
+            </h2>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-base-content/40">
+                Securing your performance tier...
+            </p>
         </div>
     </div>
-
-    <script>
-        const payBtn = document.getElementById('payBtn');
-        const modal = document.getElementById('gatewayModal');
-        const form = document.getElementById('paymentForm');
-
-        form.addEventListener('submit', (e) => {
-            // Show modal
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            payBtn.disabled = true;
-            payBtn.classList.add('opacity-70');
-        });
-    </script>
 
 </body>
 

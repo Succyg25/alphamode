@@ -15,6 +15,7 @@ class PaymentTransaction extends Model
         'amount',
         'receipt_path',
         'status',
+        'payment_method',
         'notes',
     ];
 

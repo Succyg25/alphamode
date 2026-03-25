@@ -45,31 +45,55 @@ class PaymentController extends Controller
     {
         $request->validate([
             'plan_id' => 'required|exists:plans,id',
-            'receipt' => 'required|image|max:5120', // Max 5MB
+            'payment_method' => 'required|in:card,manual',
+            'receipt' => 'required_if:payment_method,manual|image|max:5120',
         ]);
 
         $user = Auth::user();
         $plan = Plan::findOrFail($request->plan_id);
+        $method = $request->payment_method;
 
-        if ($request->hasFile('receipt')) {
-            $path = $request->file('receipt')->store('receipts', 'public');
+        if ($method === 'manual') {
+            if ($request->hasFile('receipt')) {
+                $path = $request->file('receipt')->store('receipts', 'public');
 
+                $transaction = \App\Models\PaymentTransaction::create([
+                    'user_id' => $user->id,
+                    'plan_id' => $plan->id,
+                    'amount' => $plan->price,
+                    'receipt_path' => $path,
+                    'status' => 'pending',
+                    'payment_method' => 'manual',
+                ]);
+
+                $user->membership_status = 'pending';
+                $user->save();
+
+                Mail::to($user->email)->queue(new PaymentReceived($transaction));
+
+                return redirect()->route('dashboard')->with('message', 'Receipt uploaded successfully! Your plan will be activated once verified by our team.');
+            }
+        } elseif ($method === 'card') {
+            // Simulate successful card payment auth
             $transaction = \App\Models\PaymentTransaction::create([
                 'user_id' => $user->id,
                 'plan_id' => $plan->id,
                 'amount' => $plan->price,
-                'receipt_path' => $path,
-                'status' => 'pending',
+                'status' => 'approved',
+                'payment_method' => 'card',
+                // receipt_path is null for card
             ]);
 
-            // Set user status to pending
-            $user->membership_status = 'pending';
+            // Auto-approve for card payments
+            $user->current_plan_id = $plan->id;
+            $user->membership_status = 'active';
             $user->save();
 
-            // Send confirmation email
-            Mail::to($user->email)->send(new PaymentReceived($transaction));
+            Mail::to($user->email)->queue(new PaymentReceived($transaction));
+
+            return redirect()->route('dashboard')->with('message', 'Payment successful! Your ' . $plan->name . ' plan is now active.');
         }
 
-        return redirect()->route('dashboard')->with('message', 'Receipt uploaded successfully! Your plan will be activated once verified by our team.');
+        return back()->withErrors(['error' => 'Invalid payment request.']);
     }
 }

@@ -80,16 +80,27 @@
                                     ${{ number_format($transaction->amount, 2) }}
                                 </td>
                                 <td>
-                                    <a href="{{ asset('storage/' . $transaction->receipt_path) }}" target="_blank"
-                                        class="btn btn-ghost btn-sm text-primary hover:bg-primary/10 gap-2">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-                                        View File
-                                    </a>
+                                    @if ($transaction->receipt_path)
+                                        <a href="{{ asset('storage/' . $transaction->receipt_path) }}" target="_blank"
+                                            class="btn btn-ghost btn-sm text-primary hover:bg-primary/10 gap-2">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                            View File
+                                        </a>
+                                    @else
+                                        <div class="flex items-center gap-2 text-base-content/30 px-3">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                            </svg>
+                                            <span class="text-[10px] font-bold uppercase tracking-widest italic">Digital /
+                                                Card</span>
+                                        </div>
+                                    @endif
                                 </td>
                                 <td class="text-sm opacity-60">
                                     {{ $transaction->created_at->format('M d, Y') }}

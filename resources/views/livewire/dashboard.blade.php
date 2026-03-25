@@ -56,7 +56,17 @@
                 <p class="text-xs font-bold text-base-content/40 mb-1">Membership Status</p>
                 <p
                     class="text-2xl font-display font-black {{ Auth::user()->isActive() ? 'text-success' : (Auth::user()->isPending() ? 'text-warning' : 'text-error') }}">
-                    {{ Auth::user()->isActive() ? 'ACTIVE' : (Auth::user()->isPending() ? 'PENDING' : 'INACTIVE') }}
+                    @if(Auth::user()->isActive())
+                        ACTIVE
+                    @elseif(Auth::user()->isPending())
+                        @if(!Auth::user()->current_plan_id)
+                            PLAN REQUIRED
+                        @else
+                            PENDING
+                        @endif
+                    @else
+                        INACTIVE
+                    @endif
                 </p>
             </div>
         </div>
@@ -276,16 +286,30 @@
                                     class="btn btn-outline btn-block rounded-2xl border-2 border-base-content/10 font-bold uppercase tracking-wider h-14 mt-4 text-xs">Manage Plan</a>
                             </div>
                         @elseif(Auth::user()->isPending())
-                            <div class="text-center py-6">
-                                <p class="text-[11px] font-bold text-base-content/40 mb-4 uppercase tracking-wider">Verification In Progress</p>
-                                <div class="inline-flex items-center justify-center p-4 bg-warning/10 text-warning rounded-2xl mb-6">
-                                    <svg class="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                            @if(!Auth::user()->current_plan_id)
+                                <div class="text-center py-6">
+                                    <p class="text-xs text-primary font-bold mb-4 uppercase tracking-wider">Account Initialized</p>
+                                    <div class="inline-flex items-center justify-center p-4 bg-primary/10 text-primary rounded-2xl mb-6">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-sm font-bold text-base-content mb-6">Your profile is ready! Select a performance tier to begin training.</p>
+                                    <a href="{{ route('plans') }}"
+                                        class="btn btn-primary btn-block rounded-2xl font-black uppercase tracking-widest h-14 shadow-lg shadow-primary/20">Select Plan</a>
                                 </div>
-                                <p class="text-sm font-bold text-base-content mb-6">Your payment is being verified by our team. You'll have access shortly!</p>
-                                <button disabled class="btn btn-warning btn-outline btn-block rounded-2xl font-bold uppercase tracking-wider h-14 opacity-50 cursor-not-allowed text-xs">Pending Approval</button>
-                            </div>
+                            @else
+                                <div class="text-center py-6">
+                                    <p class="text-[11px] font-bold text-base-content/40 mb-4 uppercase tracking-wider">Verification In Progress</p>
+                                    <div class="inline-flex items-center justify-center p-4 bg-warning/10 text-warning rounded-2xl mb-6">
+                                        <svg class="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-sm font-bold text-base-content mb-6">Your payment is being verified by our team. You'll have access shortly!</p>
+                                    <button disabled class="btn btn-warning btn-outline btn-block rounded-2xl font-bold uppercase tracking-wider h-14 opacity-50 cursor-not-allowed text-xs">Pending Approval</button>
+                                </div>
+                            @endif
                         @else
                             <div class="text-center py-6">
                                 <p class="text-base-content/40 font-bold mb-6">No active plan found.</p>

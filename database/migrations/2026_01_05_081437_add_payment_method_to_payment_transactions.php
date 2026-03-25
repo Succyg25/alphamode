@@ -10,10 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'email')) {
-                $table->dropColumn('email');
-            }
+        Schema::table('payment_transactions', function (Blueprint $table) {
+            $table->string('payment_method')->default('manual')->after('plan_id');
         });
     }
 
@@ -22,9 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            // Add the column back if you rollback
-            $table->string('email')->unique()->nullable();
+        Schema::table('payment_transactions', function (Blueprint $table) {
+            $table->dropColumn('payment_method');
         });
     }
 };

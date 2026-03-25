@@ -33,7 +33,7 @@ class ManagePayments extends Component
         $transaction->save();
 
         // Send approval email
-        Mail::to($user->email)->send(new PaymentApproved($transaction));
+        Mail::to($user->email)->queue(new PaymentApproved($transaction));
 
         session()->flash('message', 'Payment approved and membership activated.');
     }
@@ -50,7 +50,7 @@ class ManagePayments extends Component
         $user->save();
 
         // Send rejection email
-        Mail::to($transaction->user->email)->send(new PaymentRejected($transaction));
+        Mail::to($transaction->user->email)->queue(new PaymentRejected($transaction));
 
         session()->flash('message', 'Payment rejected.');
     }
@@ -58,7 +58,9 @@ class ManagePayments extends Component
     public function render()
     {
         $transactions = PaymentTransaction::with(['user', 'plan'])
-            ->where('status', $this->status)
+            ->when($this->status !== 'all', function ($query) {
+                $query->where('status', $this->status);
+            })
             ->where(function ($query) {
                 $query->whereHas('user', function ($q) {
                     $q->where('name', 'like', '%' . $this->search . '%')

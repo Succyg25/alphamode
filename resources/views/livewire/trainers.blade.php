@@ -67,7 +67,7 @@
                         <!-- Time Slots Section -->
                         <div class="px-2">
                             <div class="flex items-center justify-center gap-2 mb-3">
-                                <span class="material-symbols-outlined text-sm text-primary">schedule</span>
+                                <span class="material-symbols-outlined text-sm text-primary"></span>
                                 <span class="text-[10px] font-bold text-base-content/40 uppercase tracking-wider">Available
                                     Slots</span>
                             </div>

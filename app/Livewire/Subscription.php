@@ -12,6 +12,7 @@ class Subscription extends Component
     {
         $user = auth()->user();
         $user->current_plan_id = null;
+        $user->membership_status = 'inactive';
         $user->save();
 
         session()->flash('message', 'Subscription cancelled successfully.');
